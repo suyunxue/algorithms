@@ -43,4 +43,21 @@ function count () {
 //当键的类型为length的时候，length属性就不管用了
 var arr = [];
 arr['david'] = 1;
-alert(arr.length)
+alert(arr.length)//0
+
+
+
+function clear () {
+	for each (var key in Object.keys(this.dataStore)) {
+		delete this.dataStore[key];
+	}
+}
+
+//为dictionary类添加排序功能
+// 用户关心的字典内容的排序
+function showAll () {
+	for (var key in Object.keys(this.dataStore).sort) {
+		print(key + '->' + this.dataStore[key]);
+	}
+}
+

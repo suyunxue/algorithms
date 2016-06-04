@@ -59,6 +59,7 @@ function binSearch (arr, data) {
 
 
 //统计重复值的函数
+//原来只是找到的是中间
 function count (arr, data) {
 	var count = 0;
 	var position = binSearch(arr, data);

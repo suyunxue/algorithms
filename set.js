@@ -90,6 +90,7 @@ function subset (set) {
 
 
 
+//返回那些属于第一个集合但不属于第二个集合的成员
 function difference (set) {
 	var tempSet = new Set();
 	for (var i = 0; i < this.dataStore.length; i++) {
