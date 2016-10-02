@@ -4,25 +4,181 @@
 	<meta charset="UTF-8">
 	<title>test</title>
 	<style >
-		html,
-		body {
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-		.content {
-			width: 300px;
-			height: 300px;
-			background: orange;
-			margin: 0 auto;
-			position: relative;
-		}
 	</style>
 </head>
 <body>
+	<input type="text" name=""  disabled="disabled">
+	<div id="content"></div>
+	<script>
 
-	<div class="content"></div>
-	<!-- // <script src="dictionary.js"></script> -->
+	var out = [];
+	var str = 'wxyz';
+	function combine(start){
+		for (var i = start; i < str.length; i++){
+			out.push(str[i]);
+			console.log(out.join(''));
+			if(i < str.length){
+				combine(i + 1);
+			}
+			out.length = out.length - 1;
+		}
+	}
+
+ 
+
+	//简单插入排序算法
+	function inserSort(arr){
+		if(arr == null || arr.length == 0){
+			return ;
+		}
+
+		for (var i = 0; i < arr.length; i++){
+			var data = arr[i];
+			var j = i;
+			while(j > 0 && arr[j-1] > data){
+				arr[j] = arr[j-1];
+				j--; 
+			}
+			arr[j] = data;
+		}
+
+		function swap (arr, i, j){
+			var temp  = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+
+		return arr;
+	}
+
+
+	function selectSort(arr){
+		if(arr == null || arr.length == 0){
+			return ;
+		}
+
+		for(var i = 0; i < arr.length; i++){
+
+			for(var j = i+1; j < arr.length; j++){
+				if(arr[i] > arr[j]){
+					swap(arr, i, j);
+				}
+			}
+		}
+
+		function swap(arr, i, j){
+			var temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+
+		return arr;
+	}
+
+
+	function dictionOrder(n, m) {
+       if(m>=1 && m <=n && n<= Math.pow(10, 18)) {
+              var arr = [];
+              for (var i = 1; i <= n; i++){
+                  arr.push(i);
+              }
+              arr.sort();
+              return (arr[m-1]);
+       }else{
+             return ;
+       }
+	}
+
+	
+	function superType(){
+		this.property = true;
+	}
+
+	superType.prototype.getSuperValue = function(){
+		return this.property;
+	}
+
+	function subType(){
+		this.subproperty = false;
+	}
+
+	subType.prototype = new superType();
+
+	subType.prototype.getSubValue = function(){
+		return this.subproperty;
+	}
+
+	var instance = new subType();
+	console.log(instance.getSuperValue())
+
+	function superType(){
+		this.color = ['red', 'green'];
+	}
+
+	function subType(){
+		superType.call(this);
+	}
+
+function aaa(n, m){
+      var arr = [], sum = 0;
+      arr.push(n);
+      for(var i = 0; i < m; i++){
+            n = Math.sqrt(n);
+            arr.push(n);
+      }
+      for (var j = 0; j < arr.length; j++){
+            sum += arr[j];
+      }
+      console.log(sum);
+}
+
+	var CookieUtil = {
+	   get: function(name){
+	   		var cookieName = encodeURIComponent(name) + '=';
+	   		var cookieStart = document.cookie.indexOf(cookieName);
+	   		var cookieValue = null;
+
+	   		if(cookieStart > -1){
+	   			var cookieEnd = document.cookie.indexOf(';', cookieStart);
+	   			if (cookieEnd == -1){
+	   				cookieEnd = document.cookie.length;
+	   			}
+	   			cookieValue = encodeURIComponent(document.cookie.subStr(cookieStart + cookieName.length, cookieEnd));
+	   		}
+
+	   		return cookieValue;
+	   },
+	   set: function(name, value, expires, path, domain, secure){
+	   		var cookitText = encodeURIComponent(name)+"="+encodeURIComponent(value);
+
+	   		if(expires instanceof Date){
+	   			cookieText += ';expires='+ expires.toGMTString();
+	   		}
+
+	   		if(path){
+	   			cookieText += '; path=' + path;
+	   		}
+
+	   		if(domain){
+	   			cookieText += '; domain=' + domain;	   			
+	   		}
+
+	   		if(secure){
+	   			cookieText += '; secure'
+	   		}
+	   		document.cookie = cookieText;
+	   },
+
+	   unset: function(name, path, domain, secure){
+	   	   this.set(name, '', new Date(0), path, domain. secure);
+	   }
+
+
+	}
+
+
+
+
+	</script>
 </body>
 </html>
