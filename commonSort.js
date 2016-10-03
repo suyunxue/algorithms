@@ -1,3 +1,52 @@
+//归并排序
+//这个排序还是使用递归实现的，把两个数组进行分割然后一直递归
+//递归到两个元素归并，然后就这样往回走使用归并排序
+//这个第一个用来拆分数据
+//不像其他算法归并排序对于不能放入内存中过大的数据集合是一个好的选择
+//在一个典型情况下，一个大文件被分隔成多个小文件
+//每个小文件可以被读入内存使用一个合适的排序算法排序
+function mergeSort(arr){
+	var length = arr.length;
+
+	if(length === 1){
+		return arr;
+	}
+
+	var mid = Math.floor(length / 2);
+	var left = arr.slice(0, mid);
+	var right = arr.slice(mid, length);
+
+	return merge(mergeSort(left), mergeSort(right));
+}
+
+//这个第二个是用来合并左右数据，将左右有序的数组合并成有序的数组
+function merge(left, right){
+	var result = [],
+	    il = 0,
+	    ir = 0;
+
+	while(il < left.length && ir < right.length){
+		if(left[il] < right[ir]){
+			result.push(left[il++])
+		}else {
+			result.push(right[ir++]);
+		}
+	}
+
+	while(il < left.length){
+		result.push(left[il++]);
+	}
+
+	while(ir < right.length){
+		result.push(right[ir++]);
+	}
+
+	return result;
+}
+
+
+
+
 //插入排序
 //它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。
 

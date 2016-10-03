@@ -11,19 +11,66 @@
 	<div id="content"></div>
 	<script>
 
-	var out = [];
-	var str = 'wxyz';
-	function combine(start){
-		for (var i = start; i < str.length; i++){
-			out.push(str[i]);
-			console.log(out.join(''));
-			if(i < str.length){
-				combine(i + 1);
-			}
-			out.length = out.length - 1;
+	//归并排序
+	function mergeSort(arr){
+		var length = arr.length;
+
+		if(length === 1){
+			return arr;
 		}
+
+		var mid = Math.floor(length / 2);
+		var left = arr.slice(0, mid);
+		var right = arr.slice(mid, length);
+
+		return merge(mergeSort(left), mergeSort(right));
 	}
 
+	function merge(left, right){
+		var result = [],
+		    il = 0,
+		    ir = 0;
+
+		while(il < left.length && ir < right.length){
+			if(left[il] < right[ir]){
+				result.push(left[il++])
+			}else {
+				result.push(right[ir++]);
+			}
+		}
+
+		while(il < left.length){
+			result.push(left[il++]);
+		}
+
+		while(ir < right.length){
+			result.push(right[ir++]);
+		}
+
+		return result;
+	}
+
+	function telephoneNumber(){
+		var phone_number_length = 7;
+		var phoneNum = [];
+		var result = new Array(phone_number_length);
+
+		function printWords(curDigit){
+			if(curDigit == phone_number_length){
+				console.log(result.join(''));
+				return ;
+			}
+  			
+  			for(var i = 0; i <= 3; i++){
+  				result[curDigit] = getCharKey(phoneNum[curDigit], i);
+  				printWords(curDigit + 1);
+  				if(phoneNum[curDigit] == 0 || phoneNum[curDigit] == 1){
+  					return;
+  				}
+  			}
+
+		}
+	}
  
 
 	//简单插入排序算法
