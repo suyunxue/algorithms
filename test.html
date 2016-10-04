@@ -14,14 +14,13 @@
 	function numOnesInbinary(number){
 		var count = 0;
 		while(number !== 0){
-			if((number & 1) == 1){
-				count++;
-			}
-			number = number >>> 1;
+			number = (number-1) & number;
+			count++;
 		}
 
 		return count;
-	}
+	}	
+
 
 	function quickSortOptimized(data, left, right){
 		var pivotValue = data[(left+right)/2];
