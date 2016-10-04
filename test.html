@@ -11,44 +11,79 @@
 	<div id="content"></div>
 	<script>
 
-	//归并排序
-	function mergeSort(arr){
-		var length = arr.length;
-
-		if(length === 1){
-			return arr;
+	function numOnesInbinary(number){
+		var count = 0;
+		while(number !== 0){
+			if((number & 1) == 1){
+				count++;
+			}
+			number = number >>> 1;
 		}
 
-		var mid = Math.floor(length / 2);
-		var left = arr.slice(0, mid);
-		var right = arr.slice(mid, length);
-
-		return merge(mergeSort(left), mergeSort(right));
+		return count;
 	}
 
-	function merge(left, right){
-		var result = [],
-		    il = 0,
-		    ir = 0;
+	function quickSortOptimized(data, left, right){
+		var pivotValue = data[(left+right)/2];
+		var i = left;
+		var j = right;
 
-		while(il < left.length && ir < right.length){
-			if(left[il] < right[ir]){
-				result.push(left[il++])
+		while(i <= j){
+			while(data[i] < pivotValue) i++;
+
+			while(data[j] > pivotValue) j--;
+
+			if(i <= j){
+				swap(data, i, j);
+				i++;
+				j--;
+			}
+
+			if(left < j){
+				quickSortSwapping(data, left, j);
+			}
+			if(i < right){
+				quickSortSwapping(data, i, right);
+			}
+		}
+	}
+
+	//最优化快速排序
+	function quickSortSwapping(data, start, len){
+		if(len < 2){
+			return ;
+		}
+
+		var pivotIndex = start + len/2;
+		var pivotValue = data[pivotIndex];
+		var end = start + len;
+		var curr = start;
+
+		swap(data, pivotIndex, --end);
+
+		while(curr < end){
+			if(data[curr] < pivotValue){
+				cur++;
 			}else {
-				result.push(right[ir++]);
+				swap(data, curr, --end);
 			}
 		}
 
-		while(il < left.length){
-			result.push(left[il++]);
-		}
+		swap(data, end, start+len-1);
 
-		while(ir < right.length){
-			result.push(right[ir++]);
-		}
+		var llen = end - start;
+		var rlen = len - llen - 1;
 
-		return result;
+		if(llen > 1){
+			quickSortSwapping(data, start, llen);
+		}
+		if(rlen > 1){
+			quickSortSwapping(data, end+1, rlen);
+		}
 	}
+
+
+
 
 	function telephoneNumber(){
 		var phone_number_length = 7;
