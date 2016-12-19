@@ -8,71 +8,39 @@
 </head>
 <body>
 
+	<div>
+		<div>
+			<span></span>
+		</div>
+	</div>
+
 	<script>
 
-	//函数原型： $.extend(obj, objA, objB);
+	//js自己实现一个从上而下的选择器
+	window.onload = function () {
+		function find(selector, root) {
+			//分割选择器，一个一个查找
+			root = root || document;
 
-	function deepExtend(out) {
+			var parts = selector.split(' ');
+			var query = parts[0];
+			var rest = parts.slice(1).join(' ');
+			var elems = root.getElementsByTagName(query);
+			var results = [];
 
-		//生成一个返回值
-		//深扩展
-		//遍历每个对象的所有属性，如果没有则添加，如果有覆盖
-		//遍历的时候如果每个对象的属性是对象，那么就是递归进行复制
-
-		out = out || {};
-
-		for(var i = 1; i < arguments.length; i++) {
-
-			var obj = arguments[i];
-
-			if(!obj){
-				continue;
-			}
-
-			for (var key in obj){
-				if(obj.hasOwnProperty(key)){
-
-					//如果一个属性的值是一个对象的话就继续递归复制
-
-					if(typeof obj[key] === 'object') {
-						out[key] = deepExtend(out[key], obj[key]);
-					}else {
-						out[key] = obj[key];
-					}
+			for (var i = 0; i < elems.length; i++) {
+				if (rest) {
+					results = results.concat(query, find(rest, elems[i]));
+				} else {
+					results.push(elems[i]);
 				}
 
-				out[key] = obj[key];
 			}
+
+			return  results;
 		}
-
-		return out;
-
 	}
 
-
-	deepExtend({}, objA, objB);
-
-
-	var extend = function (out) {
-
-		var out = out || {};
-
-		for (var i = 1; i < arguments.length; i++) {
-			var obj = arguments[i];
-
-			if(!obj){
-				continue;
-			}
-
-			for(var key in obj) {
-				if(obj.hasOwnProperty(key)) {
-					out[key] = obj[key];
-				}
-			}
-		}
-
-		return out;
-	}
 
 
 
