@@ -11,6 +11,7 @@ window.onload = function () {
 
         for (var i = 0; i < elems.length; i++) {
             if (rest) {
+
                 var parent = elems[i].parentNode;
                 while(parent && parent.nodeName != rest) {
                     parent = parent.parentNode;
