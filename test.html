@@ -2,138 +2,47 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>test</title>
-	<style >
+	<style media="screen">
+
+
+		.a {
+			border: 1px solid crimson;
+		}
+
 	</style>
 </head>
 <body>
+<div id="parent">
+	<div id="a">I'am going to be removed</div>
+	<div id="b">Me too!</div>
+</div>
 
-	<div>
-		<p></p>
-		<div route-view></div>
-	</div>
+<script>
 
-	<script>
+function fetchComputedStyle(element, property) {
 
-	//在这个链接上看到
-	//http://www.qdfuns.com/notes/17631/23183bb3f7a895f702e1550f9487563b.html
-	//基于jquery的路由设计
+	if(window.getComputedStyle) {
 
-	//jquery-router.js
-	(function ($) {
-		'use strict';
+		var computedStyles = window.getComputedStyle(element);
 
-		window.Router = function (option) {
-			this.init(option);
+		if(computedStyles) {
+			property = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+			return computedStyles.getpropertyValue(property);
 		}
+	}else if (element.currentStyle) {
+		property = property.replace(
+			/-([a-z])/ig,
+			function (all, letter) {
+				return letter.toUpperCase();
+			});
+			return element.currentStyle[property];
+		)
+	}
+}
 
-		$.extend(Router.prototype, {
-			init: function (option) {
-				this.config = {
-					$rootContainer: $('[route-view]').first(),
-					children: option.children,
-					other: option.other
-				};
-			},
-
-			start: function () {
-				var config = this.config;
-
-				window.onhashchange = function () {
-					routeMatch(config.children, location.hash.substring(1)
-					           , config.$rootContainer)
-				};
-
-				//this.current记录了上次历史记录匹配的hash值
-				function routeMatch(children, hash, $container) {
-					var matched = false;
-
-					$.each(children, function () {
-						var result = hash.match(this.url);
-						var $template;
-						var url;
-
-						if(result && !result.index
-							&& $.inArray(hash[result[0].length]
-								, ['undefined', '/']) !== -1) {
-							if(!this.current || this.current !== result[0]) {
-								$template = $(this.template);
-								$container.empty().append($template);
-								typeof this.callback === 'function' && this.callback($template);
-								this.current = result[0];
-								this.$container = $template.is('[route-view]')
-								                  ? template
-												  : $template.find('[route-view]').first();
-
-							}
-
-							matched = true;
-							url = hash.substring(result[0].length + 1);
-							if (this.children && url) {
-								routeMatch(this.children, url, this.$container);
-
-							} else {
-								this.$container.empty();
-							}
-
-
-						} else {
-							clearCurrent(this);
-						}
-
-					});
-
-					!matched && (locatio.hash = '#' + config.other);
-				}
-
-				function clearCurrent(child) {
-					child.current = undefined;
-					child.children && $.each(child.children, function () {
-						clearCurrent(this);
-					})
-				}
-			}
-		})
-	})(window.jquery);
-
-
-	//app.js
-	var router = {
-		children: [{
-			url: /root/,
-			template: '<div>root<div route-view></div></div>',
-			callback: function () {
-				alert('root');
-			},
-			children: [{
-				url: /child1/,
-				template: '<div>child1<div route-view></div></div>',
-				children: [{
-					url: /subchild1/,
-					template: '<div>subchild1</div>'
-				}, {
-					url: /subchild2/,
-					template: '<div>subchild2</div'
-				}]
-			}, {
-				url: /child2/,
-				template: '<div>child2<div route-view></div></div>',
-				children: [{
-					url: /subchild1/,
-					template: '<div>subchild1</div>'
-				}, {
-					url: /subchild2/,
-					template: '<div>subchild2</div>'
-				}]
-			}]
-		}],
-		other: '404'
-	};
-
-	new Router(router).start();
-
-
-
-	</script>
+</script>
 </body>
 </html>
