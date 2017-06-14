@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>算法练习</title>
-</head>
-<body>
-<script>
 /**
  * 贪心算法
  *
@@ -31,6 +23,3 @@ function MinCoinChange(coins) {
 
 var minCoinChange = new MinCoinChange([1, 5, 10, 25]);
 console.log(minCoinChange.makeChange(36));
-</script>
-</body>
-</html>
