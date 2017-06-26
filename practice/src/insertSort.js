@@ -4,6 +4,7 @@
  * @param  {[type]} arr [description]
  * @return {[type]}     [description]
  */
+//从小到大
 function insertSort(arr) {
     for (var i = 1; i < arr.length; i++) {
         for (var j = i; j > 0; j--) {
@@ -17,3 +18,17 @@ function insertSort(arr) {
     return arr;
 }
 
+// 从大到小
+function insertSort(arr) {
+        for (var i = 1; i < arr.length; i++) {
+            var key = arr[i];
+            var j = i - 1;
+            while(key > arr[j] && j >= 0) {
+                arr[j+1] = arr[j];
+                arr[j] = key;
+                j = j - 1;
+            }
+        }
+
+    console.log(arr);
+}
