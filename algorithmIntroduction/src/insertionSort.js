@@ -15,6 +15,5 @@ function insertionSrot(arr) {
     return arr;
 }
 
-var arr = [23, 4, 32, 6, 43, 56, 13];
+var arr = [23, 4, 32, 6, 43, 56, 13, 2];
 insertionSrot(arr);
-
