@@ -11,16 +11,15 @@ function selectSort(arr) {
     for (var i = 0; i < arr.length; i++) {
         // 找出最小元素
         key = arr[i];
-        for (var j = i; j < arr.length; j++) {
+        for (var j = i + 1; j < arr.length; j++) {
             if (key > arr[j]) {
+                var c = key;
                 key = arr[j];
-                index = j;
+                arr[j] = c;
             }
         }
 
-        temp = arr[i];
-        arr[i] = arr[index];
-        arr[index] = temp;
+        arr[i] = key;
     }
 
     console.log(arr);
