@@ -1,4 +1,65 @@
 /**
+ * 插入排序二分查找插入
+ */
+// 二分查找策略，找出要插入的位置
+function binary(A, p, r, v) {
+    for (var i = p; i <= r; i++) {
+        if (A[i] > v) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+// 二分查找的递归过程
+function binarySearch(A, p, r, v) {
+    var q;
+    if (A[0] > v && p === 0 && r === 0) {
+        return 0;
+    }
+
+    if (p < r) {
+        q = Math.floor((p + r) / 2);
+        if (A[q] > v) {
+            binarySearch(A, p, q, v);
+            return binary(A, p, q, v);
+        }
+        else {
+            binarySearch(A, q + 1, r, v);
+            return binary(A, q + 1, r, v);
+        }
+    }
+
+    return -1;
+}
+
+// 采用二分查找的递归算法，时间复杂度nlgn
+function insertSort(A) {
+    var key;
+    var j;
+    var k;
+    for (var i = 1; i < A.length; i++) {
+        key = A[i];
+        j = i - 1;
+        k = binarySearch(A, 0, j, key);
+        console.log(k)
+        if (k != -1) {
+            for (var s = j; s >= k; s--) {
+                A[s + 1] = A[s];
+            }
+            A[k] = key;
+        }
+    }
+}
+
+var arr = [23, 4, 32, 6, 43, 56, 13, 2];
+insertSort(arr);
+console.log(arr);
+
+
+/**
  * 插入排序递归过程
  * 插入排序可以表示为一个递归过程，为了排序A[1...n]，我们递归地排序A[1...n-1],我们把A[n]
  * 插入已排序的数组A[1...n-1]，为插入排序的这个递归版本的最坏情况运行时间写一个递归式
@@ -25,13 +86,9 @@ function insert(A, p, r) {
 }
 
 
-var arr = [23, 4, 32, 6, 43, 56, 13, 2];
-insertSortRecursion(arr, 0, arr.length);
-console.log(arr);
-
-
-
-
+// var arr = [23, 4, 32, 6, 43, 56, 13, 2];
+// insertSortRecursion(arr, 0, arr.length);
+// console.log(arr);
 
 
 
