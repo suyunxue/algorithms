@@ -5,8 +5,6 @@ function buildMaxHeap(A) {
     }
 }
 
-
-
 function heapSort(A) {
     buildMaxHeap(A);
     for (var i = A.length; i >= 2; i--) {
