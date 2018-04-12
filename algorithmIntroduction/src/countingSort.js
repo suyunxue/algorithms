@@ -19,3 +19,9 @@ function countingSort(A, B, k) {
         C[A[j]] = C[A[j]] - 1;
     }
 }
+
+var arr = [2, 43, 43, 2, 4, 65, 6];
+var b = [];
+var c = [];
+countingSort(arr, b, c);
+console.log(b);
