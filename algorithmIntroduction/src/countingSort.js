@@ -3,25 +3,33 @@
 function countingSort(A, B, k) {
     var C = new Array(k);
     for (var j = 0; j < k; j++) {
-        C[i] = 0;
+        C[j] = 0;
     }
+    console.log(C);
 
     for (var j = 0; j < A.length; j++) {
         C[A[j]] = C[A[j]] + 1;
     }
 
-    for (var i = 0; i < k; i++) {
+    console.log(C);
+
+    for (var i = 1; i < k; i++) {
         C[i] = C[i] + C[i - 1];
     }
 
-    for (var j = A.length; j > 0; j--) {
+    console.log(C);
+
+    for (var j = A.length - 1; j >= 0; j--) {
         B[C[A[j]]] = A[j];
+        console.log(B);
         C[A[j]] = C[A[j]] - 1;
+        console.log(C);
     }
+
+
 }
 
 var arr = [2, 43, 43, 2, 4, 65, 6];
 var b = [];
-var c = [];
-countingSort(arr, b, c);
+countingSort(arr, b, 100);
 console.log(b);
