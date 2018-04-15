@@ -19,8 +19,8 @@ function countingSort(A, B, k) {
 
     console.log(C);
 
-    for (var j = A.length - 1; j >= 0; j--) {
-        B[C[A[j]]] = A[j];
+    for (var j = 0; j < A.length; j++) {
+        B[C[A[j]] - 1] = A[j];
         console.log(B);
         C[A[j]] = C[A[j]] - 1;
         console.log(C);
