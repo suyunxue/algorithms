@@ -26,7 +26,6 @@ function countingSort(A, B, k) {
         console.log(C);
     }
 
-
 }
 
 var arr = [2, 43, 43, 2, 4, 65, 6];
