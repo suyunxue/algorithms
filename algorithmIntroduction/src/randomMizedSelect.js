@@ -32,11 +32,7 @@ function randomizedParition(A, p, r) {
 
     console.log(A, p, r);
 
-    debugger;
-
     i = p +  Math.round(Math.random() * (r - p));
-
-
 
     swap(A, i, r);
 
@@ -72,5 +68,5 @@ function swap(A, i, j) {
 }
 
 
-var arr = [3, 43, 342, 4, 32];
+var arr = [3, 43, 342, 4, 32]; // 3, 4, 32, 43, 342
 console.log(randomMizedSelect(arr, 0, arr.length - 1, 3));
