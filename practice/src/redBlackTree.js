@@ -41,5 +41,17 @@ let ReadBlackTree = (function () {
 
             return node.color === Colors.RED;
         }
+
+        flipColors(node) {
+            node.left.flipColor();
+            node.right.flipColor();
+        }
+
+        rotateLeft(node) {
+            var temp = node.rigth;
+            if (temp !== null) {
+
+            }
+        }
     }
 })
