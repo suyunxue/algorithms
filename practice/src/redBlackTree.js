@@ -50,8 +50,17 @@ let ReadBlackTree = (function () {
         rotateLeft(node) {
             var temp = node.rigth;
             if (temp !== null) {
-
+                node.right = temp.left;
+                temp.left = node;
+                temp.color = node.color;
+                node.color = Colos.RED;
             }
+
+            return temp;
+        }
+
+        rotateRight(node) {
+
         }
     }
 })
