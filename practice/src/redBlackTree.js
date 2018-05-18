@@ -60,7 +60,36 @@ let ReadBlackTree = (function () {
         }
 
         rotateRight(node) {
-
+            var temp = node.left;
+            if (temp !== null) {
+                node.left = temp.right;
+                temp.right = node;
+                temp.color = node.color;
+                node.color = Colors.RED;
+            }
+            return temp;
         }
     }
 })
+
+
+
+function leftRotate(T, x) {
+    y = x.right;
+    x.right = y.left;
+    if (x.left !== y.left) {
+        y.left.p = x;
+    }
+    y.p = x.p;
+    if (x.p == T.nil) {
+        T.root = y;
+    }
+    else if (x == x.p.left) {
+        x.p.left = y;
+    }
+    else {
+        x.p.right = y;
+    }
+    y.left = x;
+    x.p = y;
+}
