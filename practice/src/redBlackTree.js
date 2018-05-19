@@ -1,8 +1,8 @@
 // https://blog.csdn.net/rth362147773/article/details/78014688
 // 红黑树前端js代码
 
-let ReadBlackTree = (function () {
-    let colors = {
+let RedBlackTree = (function () {
+    let Colors = {
         RED: 0,
         BLACK: 1
     };
@@ -48,12 +48,12 @@ let ReadBlackTree = (function () {
         }
 
         rotateLeft(node) {
-            var temp = node.rigth;
-            if (temp !== null) {
+            var temp = node.right;
+            if (temp != null) {
                 node.right = temp.left;
                 temp.left = node;
                 temp.color = node.color;
-                node.color = Colos.RED;
+                node.color = Colors.RED;
             }
 
             return temp;
@@ -69,27 +69,52 @@ let ReadBlackTree = (function () {
             }
             return temp;
         }
-    }
-})
 
+        insertNode(node, element) {
+            if (node === null) {
+                return new Node(element, Colors.RED);
+            }
 
+            var newRoot = node;
 
-function leftRotate(T, x) {
-    y = x.right;
-    x.right = y.left;
-    if (x.left !== y.left) {
-        y.left.p = x;
+            if (element < node.key) {
+                node.left = this.insertNode(node.left, element);
+            }
+            else if (element > node.key) {
+                node.right = this.insertNode(node.right, element);
+            }
+            else {
+                node.key = element;
+            }
+
+            if (this.isRed(node.right) && !this.isRed(node.left)) {
+                newRoot = this.rotateLeft(node);
+            }
+
+            if (this.isRed(node.left) && this.isRed(node.left.left)) {
+                newRoot = this.rotateRight(node);
+            }
+
+            if (this.isRed(node.left) && this.isRed(node.right)) {
+                this.flipColors(node);
+            }
+
+            return newRoot;
+        }
+
+        insert(element) {
+            this.root = this.insertNode(this.root, element);
+            // debugger;
+            console.log(this.root);
+
+            this.root.color = Colors.BLACK;
+        }
+
     }
-    y.p = x.p;
-    if (x.p == T.nil) {
-        T.root = y;
-    }
-    else if (x == x.p.left) {
-        x.p.left = y;
-    }
-    else {
-        x.p.right = y;
-    }
-    y.left = x;
-    x.p = y;
-}
+
+    return RedBlackTree;
+})();
+
+var rbTree = new RedBlackTree();
+rbTree.insert(1);
+rbTree.insert(2);
