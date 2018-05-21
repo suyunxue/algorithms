@@ -2,177 +2,177 @@
 // https://segmentfault.com/a/1190000012115424
 // 红黑树前端js代码
 
-let RedBlackTree = (function () {
-    let Colors = {
-        RED: 0,
-        BLACK: 1
-    };
+// let RedBlackTree = (function () {
+//     let Colors = {
+//         RED: 0,
+//         BLACK: 1
+//     };
 
-    class Node {
-        constructor(key, color) {
-            this.key = key;
-            this.left = null;
-            this.right = null;
-            this.color = color;
+//     class Node {
+//         constructor(key, color) {
+//             this.key = key;
+//             this.left = null;
+//             this.right = null;
+//             this.color = color;
 
-            this.flipColor = function () {
-                if (this.color === Colors.RED) {
-                    this.color = Colors.BLACK;
-                }
-                else {
-                    this.color = Colors.RED;
-                }
-            }
-        }
-    }
+//             this.flipColor = function () {
+//                 if (this.color === Colors.RED) {
+//                     this.color = Colors.BLACK;
+//                 }
+//                 else {
+//                     this.color = Colors.RED;
+//                 }
+//             }
+//         }
+//     }
 
-    class RedBlackTree {
-        constructor() {
-            this.root = null;
-        }
+//     class RedBlackTree {
+//         constructor() {
+//             this.root = null;
+//         }
 
-        getRoot() {
-            return this.root;
-        }
+//         getRoot() {
+//             return this.root;
+//         }
 
-        isRed(node) {
-            if (!node) {
-                return false;
-            }
+//         isRed(node) {
+//             if (!node) {
+//                 return false;
+//             }
 
-            return node.color === Colors.RED;
-        }
+//             return node.color === Colors.RED;
+//         }
 
-        flipColors(node) {
-            node.left.flipColor();
-            node.right.flipColor();
-        }
+//         flipColors(node) {
+//             node.left.flipColor();
+//             node.right.flipColor();
+//         }
 
-        rotateLeft(node) {
-            var temp = node.right;
-            if (temp != null) {
-                node.right = temp.left;
-                temp.left = node;
-                temp.color = node.color;
-                node.color = Colors.RED;
-            }
+//         rotateLeft(node) {
+//             var temp = node.right;
+//             if (temp != null) {
+//                 node.right = temp.left;
+//                 temp.left = node;
+//                 temp.color = node.color;
+//                 node.color = Colors.RED;
+//             }
 
-            return temp;
-        }
+//             return temp;
+//         }
 
-        rotateRight(node) {
-            var temp = node.left;
-            if (temp !== null) {
-                node.left = temp.right;
-                temp.right = node;
-                temp.color = node.color;
-                node.color = Colors.RED;
-            }
-            return temp;
-        }
+//         rotateRight(node) {
+//             var temp = node.left;
+//             if (temp !== null) {
+//                 node.left = temp.right;
+//                 temp.right = node;
+//                 temp.color = node.color;
+//                 node.color = Colors.RED;
+//             }
+//             return temp;
+//         }
 
-        insertNode(node, element) {
-            if (node === null) {
-                return new Node(element, Colors.RED);
-            }
+//         insertNode(node, element) {
+//             if (node === null) {
+//                 return new Node(element, Colors.RED);
+//             }
 
-            var newRoot = node;
+//             var newRoot = node;
 
-            if (element < node.key) {
-                node.left = this.insertNode(node.left, element);
-            }
-            else if (element > node.key) {
-                node.right = this.insertNode(node.right, element);
-            }
-            else {
-                node.key = element;
-            }
+//             if (element < node.key) {
+//                 node.left = this.insertNode(node.left, element);
+//             }
+//             else if (element > node.key) {
+//                 node.right = this.insertNode(node.right, element);
+//             }
+//             else {
+//                 node.key = element;
+//             }
 
-            if (this.isRed(node.right) && !this.isRed(node.left)) {
-                newRoot = this.rotateLeft(node);
-            }
+//             if (this.isRed(node.right) && !this.isRed(node.left)) {
+//                 newRoot = this.rotateLeft(node);
+//             }
 
-            if (this.isRed(node.left) && this.isRed(node.left.left)) {
-                newRoot = this.rotateRight(node);
-            }
+//             if (this.isRed(node.left) && this.isRed(node.left.left)) {
+//                 newRoot = this.rotateRight(node);
+//             }
 
-            if (this.isRed(node.left) && this.isRed(node.right)) {
-                this.flipColors(node);
-            }
+//             if (this.isRed(node.left) && this.isRed(node.right)) {
+//                 this.flipColors(node);
+//             }
 
-            return newRoot;
-        }
+//             return newRoot;
+//         }
 
-        insert(element) {
-            this.root = this.insertNode(this.root, element);
-            // debugger;
-            console.log(this.root);
+//         insert(element) {
+//             this.root = this.insertNode(this.root, element);
+//             // debugger;
+//             console.log(this.root);
 
-            this.root.color = Colors.BLACK;
-        }
+//             this.root.color = Colors.BLACK;
+//         }
 
-        // remove(node) {
-        //     while (true) {
-        //         let {left, right, parent, color} = node;
+//         // remove(node) {
+//         //     while (true) {
+//         //         let {left, right, parent, color} = node;
 
-        //         // 组合1
-        //         if (!left && !right && color === 'red') {
-        //             parent[parent.left === node ? 'left' : 'right'] = null;
-        //             return this;
-        //         }
+//         //         // 组合1
+//         //         if (!left && !right && color === 'red') {
+//         //             parent[parent.left === node ? 'left' : 'right'] = null;
+//         //             return this;
+//         //         }
 
-        //         // 组合2
-        //         if (!left && !right && color === 'black') {
-        //             if (parent) {
-        //                 let nullNode = new Node(null);
-        //                 nullNode.parent = parent;
-        //                 nullNode.color = ['black', 'black'];
-        //                 parent[parent.left === node ? 'left' : 'right'] = nullNode;
-        //                 this._repairTree(nullNode);
-        //             }
-        //             else {
-        //                 this.root = null;
-        //             }
+//         //         // 组合2
+//         //         if (!left && !right && color === 'black') {
+//         //             if (parent) {
+//         //                 let nullNode = new Node(null);
+//         //                 nullNode.parent = parent;
+//         //                 nullNode.color = ['black', 'black'];
+//         //                 parent[parent.left === node ? 'left' : 'right'] = nullNode;
+//         //                 this._repairTree(nullNode);
+//         //             }
+//         //             else {
+//         //                 this.root = null;
+//         //             }
 
-        //             return this;
-        //         }
+//         //             return this;
+//         //         }
 
-        //         // 组合4
-        //         if ((!left && right && color === 'black') || (left && !right && color === 'black')) {
-        //             if (parent) {
-        //                 parent[parent.left === node ? 'left' : 'right'] = node.left || node.right;
-        //             }
-        //             else {
-        //                 this.root = node.left || node.right;
-        //             }
+//         //         // 组合4
+//         //         if ((!left && right && color === 'black') || (left && !right && color === 'black')) {
+//         //             if (parent) {
+//         //                 parent[parent.left === node ? 'left' : 'right'] = node.left || node.right;
+//         //             }
+//         //             else {
+//         //                 this.root = node.left || node.right;
+//         //             }
 
-        //             node[node.left ? 'left' : 'rigth'].color = 'black';
-        //             return this;
-        //         }
+//         //             node[node.left ? 'left' : 'rigth'].color = 'black';
+//         //             return this;
+//         //         }
 
-        //         // 组合5&6
-        //         if (left && right) {
-        //             // 寻找后继结点
-        //             let successor = right;
-        //             while (successor.left) {
-        //                 successor = successor.left;
-        //             }
+//         //         // 组合5&6
+//         //         if (left && right) {
+//         //             // 寻找后继结点
+//         //             let successor = right;
+//         //             while (successor.left) {
+//         //                 successor = successor.left;
+//         //             }
 
-        //             // 用后继结点代替node
-        //             node.value = successor.value;
+//         //             // 用后继结点代替node
+//         //             node.value = successor.value;
 
-        //             // 删除后继结点
-        //             node = successor;
+//         //             // 删除后继结点
+//         //             node = successor;
 
-        //         }
+//         //         }
 
-        //     }
-        // }
+//         //     }
+//         // }
 
-    }
+//     }
 
-    return RedBlackTree;
-})();
+//     return RedBlackTree;
+// })();
 
 function Node(value) {
     this.value = value;
@@ -341,7 +341,103 @@ RedBlackTree.prototype.remove = function (node) {
     }
 }
 
+RedBlackTree.prototype._repairTree = function (node) {
+    while (node.parent) {
+        let father = node.parent;
+        let brother = father[father.left === node ? 'right' : 'left'];
+        let son = brother[father.left === node ? 'right' : 'left'];
+        let daugh = brother[father.left === node ? 'left' : 'right'];
+        if (brother.color === 'black') {
+            if (son && son.color === 'red') {
+                // 情形一
+                // 旋转brother和father
+                this._rotate(brother);
+                // 变色
+                brother.color = father.color;
+                father.color = 'black';
+                son.color = 'black';
+                // 移除black
+                if (!node.value) {
+                    // nullNode
+                    father[father.left === node ? 'left' : 'right'] = null;
+                }
+                else {
+                    node.color = 'black';
+                }
+                // 删除操作完成
+                return;
+            }
+            else if (daugh && daugh.color === 'red') {
+                // 情形二
+                // 旋转son和brother
+                this._rotate(son);
+                // 变色
+                son.color = 'black';
+                brother.color = 'red';
+                // 变成情形一，继续循环
+            }
+            else {
+                // 情形三
+                // brother无红子结点
+                if (father.color === 'red') {
+                    // father为红色
+                    father.color = 'black';
+                    brother.color = 'red';
+                    // 移除black
+                    if (!node.value) {
+                        // nullNode
+                        father[father.left === node ? 'left' : 'right'] = null;
+                    }
+                    else {
+                        node.color = 'black';
+                    }
+                    // 删除操作完成
+                    return;
+                }
+                else {
+                    // father为黑色
+                    father.color = ['black', 'black'];
+                    brother.color = 'red';
+                    // 移除black
+                    if (!node.value) {
+                        // nullNode
+                        father[father.left === node ? 'left' : 'right'] = null;
+                    }
+                    else {
+                        node.color = 'black';
+                    }
+                    node = father;
+                    // 结点上移，继续循环
+                }
+            }
+            else {
+                // 情形四
+                this._rotate(brother);
+                brother.color = 'black';
+                father.color = 'red';
+                // 继续循环
+            }
+        }
+        this.root = node;
+        node.color = 'black';
+    }
+}
 
-var rbTree = new RedBlackTree();
-rbTree.insert(1);
-rbTree.insert(2);
+RedBlackTree.prototype.find = function (value) {
+    let current = this.root;
+    while (current.value !== value) {
+        current = current[value >= current.value ? 'right' : 'left'];
+    }
+    return current;
+}
+
+let arr = [11, 2, 14, 1, 7, 15, 5, 8, 4];
+let tree = new RedBlackTree();
+arr.forEach(i => tree.insert(new Node(i)));
+let findNode = tree.find(15);
+tree.remove(findNode);
+
+
+// var rbTree = new RedBlackTree();
+// rbTree.insert(1);
+// rbTree.insert(2);
