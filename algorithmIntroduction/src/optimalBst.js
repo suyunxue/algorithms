@@ -101,5 +101,3 @@ function printConstructOptimalBst(root, i, j, r) {
     printConstructOptimalBst(root, i, rootChild - 1, rootChild);
     printConstructOptimalBst(root, rootChild + 1, j, rootChild);
 }
-
-
