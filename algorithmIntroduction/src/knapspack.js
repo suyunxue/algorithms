@@ -1,4 +1,5 @@
 
+// 贪心算法，背包问题
 function findMaxValue(maxWeight, numGoods, weight, value) {
     var max = new Array(numGoods + 1);
     for (var i = 0; i < numGoods + 1; i++) {
