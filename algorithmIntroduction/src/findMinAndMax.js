@@ -7,7 +7,6 @@
  * 小的和小的比较
  */
 
-
 function findMinAndMax(arr) {
     var min;
     var max;
