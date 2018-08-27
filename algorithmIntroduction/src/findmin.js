@@ -4,6 +4,7 @@
  * n 硬币的种类
  * https://blog.csdn.net/KangRoger/article/details/36036101
  * https://blog.csdn.net/wdxin1322/article/details/9501163
+ * 看到第3段
  */
 function findMin(money, coin, n) {
     var coinNum = new Array(money + 1); // 最少需要的硬币个数
