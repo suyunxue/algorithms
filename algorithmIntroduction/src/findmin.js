@@ -20,30 +20,42 @@ function findMin(money, coin, n) {
         var usedMoney = 0;
         for (var j = 0; j < n; j++) {
             if (i >= coin[j]) {
-                if (coinNum[i - coin[j]] + 1 <= minNum
-                    && (i == coin[j] || coinValue[i - coin[j]] != 0)) {
-                        minNum = coinNum[i - coin[j]] + 1;
-                        usedMoney = coin[j];  // 更新
+                console.log('coin[j]', coin[j]);
+                if (coinNum[i - coin[j]] + 1 <= minNum) {
+                // }
+                    // && (i == coin[j] || coinValue[i - coin[j]] != 0)) {
+                    minNum = coinNum[i - coin[j]] + 1;
+                    console.log('minNum', minNum);
+                    usedMoney = coin[j];  // 更新
                 }
             }
         }
-        coinNum[i] = minNum;
-        coinValue[i] = usedMoney;
+
+        // d[i] = min{d[i - vj] + 1} i-vj >= 0 状态转移方程
+
+        coinNum[i] = minNum; // 硬币数量
+        coinValue[i] = usedMoney; // 最大花的硬币数
     }
 
     console.log(coinValue);
+    console.log(coinNum);
 
-    if (coinValue[money] === 0) {
-        console.log('找不开零钱');
-    }
-    else {
-        console.log('需要最少硬币个数为： ', coinNum[money]);
-        console.log('硬币分别为');
-        while (money > 0) {
-            console.log(coinValue[money]);
-            money -= coinValue[money];
-        }
-    }
+    // while (money > 0) {
+    //     console.log(coinValue[money]);
+    //     money -= coinValue[money];
+    // }
+
+    // if (coinValue[money] === 0) {
+    //     console.log('找不开零钱');
+    // }
+    // else {
+    //     console.log('需要最少硬币个数为： ', coinNum[money]);
+    //     console.log('硬币分别为');
+    //     while (money > 0) {
+    //         console.log(coinValue[money]);
+    //         money -= coinValue[money];
+    //     }
+    // }
 }
 
 var money = 18;
