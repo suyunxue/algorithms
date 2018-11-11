@@ -1,10 +1,33 @@
-// https://segmentfault.com/a/1190000011983269
-// 算法实现
+// // 算法实现
 
-function bfs(G, s) {
-    for (let i = 0; i < G.length; i++) {
-        u.color = white;
-        u.d = Infinity;
-        u.bfs
+const map = {
+    '武汉': {
+        '广州': {},
+        '西藏': {},
+        '上海': {}
+    },
+    '上海': {
+        '武汉': {},
+        '广州': {}
+    }
+};
+
+function breadthSearch(obj, goal, arr = ['北京']) {
+    for (let key in obj) {
+        if (arr.indexOf(key) < 0) {
+            arr.push(key);
+            if (key === goal) {
+                return arr;
+            }
+            else {
+                return breadthSearch(obj[key], goal, arr);
+            }
+        }
     }
 }
+
+let res = breadthSearch(map, '广州');
+
+console.log(res);
+
+
