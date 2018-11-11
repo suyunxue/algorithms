@@ -20,7 +20,7 @@ class Graph {
         while (queue.length > 0) {
             let u = queue.shift();
             graphStatus.detect(v);
-            this.adjList(u).forEach(item => {
+            this.adjList.get(u).forEach(item => {
                 if (!graphStatus.isDetected(item)) {
                     graphStatus.detect(item);
                     queue.push(item);
@@ -39,7 +39,8 @@ class Graph {
         while (stack.length > 0) {
             let u = stack.pop();
             colorStatus.detect(u);
-            this.adjList(u).forEach(item => {
+            console.log(this.adjList.get(u));
+            this.adjList.get(u).forEach(item => {
                 if (!colorStatus.detect(item)) {
                     stack.push(item);
                     colorStatus.detect(u);
@@ -88,3 +89,18 @@ class GraphStatus {
     }
 }
 
+let graph = new Graph();
+let DFSarry = ['a', 'b', 'c', 'd', 'e', 'f'];
+for (let i = 0; i < DFSarry.length; i++) {
+    graph.addVertex(DFSarry[i]);
+}
+graph.addEdge('a', 'c');
+graph.addEdge('a', 'd');
+graph.addEdge('b', 'd');
+graph.addEdge('b', 'e');
+graph.addEdge('c', 'f');
+graph.addEdge('f', 'e');
+
+let result = graph.bfs('a', (u) => {
+    console.log(u);
+});
