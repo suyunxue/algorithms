@@ -1,3 +1,5 @@
+// https://segmentfault.com/a/1190000011526255
+
 class Graph {
     constructor() {
         this.vertices = [];
