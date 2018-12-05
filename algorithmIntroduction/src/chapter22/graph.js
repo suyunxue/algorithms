@@ -19,7 +19,6 @@ function Graph() {
             var neighbors = addjList.get(vertices[i]);
             for (var j = 0; j < neighbors.length; j++) {
                 s += neighbors[j] + ' ';
-                alert(s);
             }
             s += ' \n';
         }
