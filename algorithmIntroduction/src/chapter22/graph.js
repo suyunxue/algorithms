@@ -24,7 +24,41 @@ function Graph() {
         }
         return s;
     }
+
+    this.bfs = function (v, callback) {
+        
+        var color = initializeColor();
+        var queue = [];
+        queue.push(v);
+
+        while (queue.length) {
+            var u = queue.shift();
+            neighbors = addjList.get(u);
+            color[u] = 'grey';
+            for (var i = 0; i < neighbors.length; i++) {
+                var w = neighbors[i];
+                if (color[w] === 'white') {
+                    color[w] = 'grey';
+                    queue.push(w);
+                }
+            }
+            color[u] = 'black';
+            if (callback) {
+                callback(u);
+            }
+        }
+    }
 }
+
+var initializeColor = function () {
+    var color = [];
+    for (var i = 0; i < vertices.length; i++) {
+        color[vertices[i]] = 'white';
+    }
+
+    return color;
+};
+
 
 var graph = new Graph();
 var myVertices = ['a', 'b', 'c', 'd'];
