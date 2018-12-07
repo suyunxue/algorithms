@@ -58,6 +58,41 @@ function Graph() {
             }
         }
     }
+
+    this.BFS = function (v) {
+
+        var color = initializeColor();
+        var queue = [];
+        var d = [];
+        var pred = [];
+        queue.push(v);
+
+        for (var i = 0; i < vertices.length; i++) {
+            d[vertices[i]] = 0;
+            pred[vertices[i]] = null;
+        }
+
+        while (queue.length) {
+            var u = queue.shift();
+            var neighbors = addjList.get(u);
+            color[u] = 'grey';
+            for (i = 0; i < neighbors.length; i++) {
+                var w = neighbors[i];
+                if (color[w].color === 'white') {
+                    color[w] = 'grey';
+                    d[w] = d[u] + 1;
+                    pred[w] = u;
+                    queue.push(w);
+                }
+            }
+            color[u] = 'black';
+        }
+
+        return {
+            distances: d,
+            predecessors: pred
+        }
+    }
 }
 
 
