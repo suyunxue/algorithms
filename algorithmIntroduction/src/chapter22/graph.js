@@ -25,6 +25,16 @@ function Graph() {
         return s;
     }
 
+
+    var initializeColor = function () {
+        var color = [];
+        for (var i = 0; i < vertices.length; i++) {
+            color[vertices[i]] = 'white';
+        }
+    
+        return color;
+    };
+
     this.bfs = function (v, callback) {
         
         var color = initializeColor();
@@ -50,15 +60,10 @@ function Graph() {
     }
 }
 
-var initializeColor = function () {
-    var color = [];
-    for (var i = 0; i < vertices.length; i++) {
-        color[vertices[i]] = 'white';
-    }
 
-    return color;
-};
-
+function printNode(value) {
+    console.log('Visited vertex: ' + value);
+}
 
 var graph = new Graph();
 var myVertices = ['a', 'b', 'c', 'd'];
@@ -69,5 +74,7 @@ for  (var i = 0; i < myVertices.length; i++) {
 graph.addEdge('a', 'b');
 graph.addEdge('a', 'c');
 graph.addEdge('a', 'd');
+
+graph.bfs(myVertices[0], printNode);
 
 console.log(graph.toString());
