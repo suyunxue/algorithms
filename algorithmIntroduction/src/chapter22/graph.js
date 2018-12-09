@@ -78,12 +78,13 @@ function Graph() {
             color[u] = 'grey';
             for (i = 0; i < neighbors.length; i++) {
                 var w = neighbors[i];
+                debugger;
                 if (color[w].color === 'white') {
                     color[w] = 'grey';
                     d[w] = d[u] + 1;
                     pred[w] = u;
                     queue.push(w);
-                }
+                }   
             }
             color[u] = 'black';
         }
@@ -113,3 +114,26 @@ graph.addEdge('a', 'd');
 graph.bfs(myVertices[0], printNode);
 
 console.log(graph.toString());
+
+var shortesPathA = graph.BFS(myVertices[2]);
+console.log(shortesPathA);
+
+var fromVertex = myVertices[0];
+for (var i = 1; i < myVertices.length; i++) {
+    var toVertex = myVertices[i];
+    var path = [];
+    for (var v = toVertex; v !== fromVertex; 
+        v = shortestPathA.predecessors[v]) {
+        path.push(v);
+    }
+
+    path.push(fromVertex);
+    var s = path.pop();
+    while (!path.length) {
+        s += ' - ' + path.pop();
+    }
+
+    console.log(s);
+
+
+}
