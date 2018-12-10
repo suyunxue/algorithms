@@ -94,8 +94,78 @@ function Graph() {
             predecessors: pred
         }
     }
-}
 
+    this.dfs = function (callback) {
+        var color = initializeColor();
+        for (var i = 0; i < vertices.length; i++) {
+            if (color[vertices[i]] === 'white') {
+                dfsVisit(vertices[i], color, callback);
+            }
+        }
+    }
+
+    var dfsVisit = function (u, color, callback) {
+        color[u] = 'grey';
+        if (callback) {
+            callback(u);
+        }
+
+        var neighbors = addjList.get(u);
+        for (var i = 0; i < neighbors.length; i++) {
+            var w = neighbors[i];
+            if (color[w] === 'white') {
+                dfsVisit(w, color, callback);
+            }
+        }
+
+        color[u] = 'black';
+    }
+
+    var time = 0;
+    this.DFS = function() {
+        var color = initializeColor();
+        var d = [];
+        var f = [];
+        var p = [];
+        var time = [];
+
+        for (var i = 0; i < vertices.length; i++) {
+            f[vertices[i]] = 0;
+            d[vertices[i]] = 0;
+            p[vertices[i]] = null;
+        }
+
+        for (var i = 0; i < vertices.length; i++) {
+            if (color[vertices[i]] === 'white') {
+                DFSVisit(vertices[i], color, d, f, p);
+            }
+        }
+
+        return {
+            discovery: d,
+            finished: f,
+            predecessors: p
+        };
+    };
+
+    var DFSVisit = function (u, color, d, f, p) {
+        console.log('discovered ' + u);
+        color[u] = 'grey';
+        d[u] = ++time;
+        var neighbors = addjList.get(u);
+        for (var i = 0; i < neighbors.length; i++) {
+            var w = neighbors[i];
+            if (color[w] === 'white') {
+                p[w] = u;
+                DFSVisit(w, color, d, f, p);
+            }
+        }
+        color[u] = 'black';
+        f[u] = ++time;
+        console.log('explored ' + u);
+    }
+
+}
 
 function printNode(value) {
     console.log('Visited vertex: ' + value);
@@ -132,8 +202,6 @@ for (var i = 1; i < myVertices.length; i++) {
     while (!path.length) {
         s += ' - ' + path.pop();
     }
-
-    console.log(s);
-
-
 }
+
+graph.dfs(printNode);
