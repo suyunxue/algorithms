@@ -78,7 +78,6 @@ function Graph() {
             color[u] = 'grey';
             for (i = 0; i < neighbors.length; i++) {
                 var w = neighbors[i];
-                debugger;
                 if (color[w].color === 'white') {
                     color[w] = 'grey';
                     d[w] = d[u] + 1;
@@ -193,7 +192,7 @@ for (var i = 1; i < myVertices.length; i++) {
     var toVertex = myVertices[i];
     var path = [];
     for (var v = toVertex; v !== fromVertex; 
-        v = shortestPathA.predecessors[v]) {
+        v = shortesPathA.predecessors[v]) {
         path.push(v);
     }
 
@@ -205,3 +204,6 @@ for (var i = 1; i < myVertices.length; i++) {
 }
 
 graph.dfs(printNode);
+
+var result = graph.DFS();
+console.log(result);
