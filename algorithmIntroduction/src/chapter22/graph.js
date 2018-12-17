@@ -230,6 +230,37 @@ function Graph() {
 
         return dist;
     }
+
+    this.prim = function () {
+        var parent = [];
+        var key = [];
+        var visited = [];
+        var length = this.graph.length;
+        var i;
+
+        for (var i = 0; i < length; i++) {
+            key[i] = Infinity;
+            visited[i] = false;
+        }
+
+        key[0] = 0;
+        parent[0] = -1;
+
+        for (i = 0; i < length - 1; i++) {
+            var u = minKey(key, visited);
+            visited[u] = true;
+
+            for (var v = 0; v < length; v++) {
+                if (this.graph[u][v] && visited[v] == false
+                    && this.graph[u][v] < key[v]) {
+                        parent[v] = u;
+                        key[v] = this.graph[u][v];
+                }
+            }
+        }
+
+        return parent;
+    }
 }
 
 function printNode(value) {
