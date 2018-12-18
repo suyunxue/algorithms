@@ -261,6 +261,35 @@ function Graph() {
 
         return parent;
     }
+
+    this.kruskal = function () {
+        var length = this.graph.length;
+        var parent = [];
+        var cost;
+        var ne = 0, a, b, u, v, i, j, min;
+        cost = initializeCost();
+
+        while (ne < length - 1) {
+            for (i = 0, min = Infinity; i < length; i++) {
+                for (j = 0; j < length; j++) {
+                    if (cost[i][j] < min) {
+                        min = cost[i][j];
+                        u = i; 
+                        v = j;
+                    }
+                }
+            }
+
+            u = find(u, parent);
+            v = find(v, parent);
+
+            if (union(u, v, parent)) {
+                ne++;
+            }
+
+            cost[u][v] = cost[v][u] = Infinity;
+        }
+    }
 }
 
 function printNode(value) {
