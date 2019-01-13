@@ -290,6 +290,22 @@ function Graph() {
             cost[u][v] = cost[v][u] = Infinity;
         }
     }
+
+    var find = function (i, parent) {
+        while (parent[i]) {
+            i = parent[i];
+        }
+        return i;
+    }
+
+    var union = function (i, j, parent) {
+        if (i != j) {
+            parent[j] = i;
+            return true;
+        }
+
+        return false;
+    }
 }
 
 function printNode(value) {
