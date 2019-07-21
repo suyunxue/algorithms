@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/
+        
+        function rabinKarpMatcher(pat, txt, q) {
+            let N = txt.length;
+            let M = pat.length;
+            let h = 1;
+            let p = 0;
+            let t = 0;
+
+            for (let i = 0; i < M - 1; i++) {
+                h = (h * d) % q;
+            }
+
+            for (let i = 0; i < M; i++) {
+                p = (d * p + pat.charCodeAt(i)) % q;
+                t = (d * t + txt.charCodeAt(i)) % q;
+            }
+
+            for (let i = 0; i <= N - M; i++) {
+
+                if (p === t) {
+                    for (j = 0; j < M; j++) {
+                        if (txt.charAt(i + j) !== pat.charAt(j)) {
+                            break;
+                        }
+                    }
+                    if (j === M) {
+                        console.log('pattern found at index ', i);
+                    }
+                }
+
+                if (i < N - M) {
+                    t = (d * (t - txt.charCodeAt(i) * h) + txt.charCodeAt(i + M)) % q;
+                    
+                    if (t < 0) {
+                        t = (t + q);
+                    }
+                }
+            }
+        }
+
+        let d = 256;
+        let txt = 'GEEKS FOR GEEKS';
+        let pat = 'GEEK';
+        let q = 101;
+        let res = rabinKarpMatcher(pat, txt, q);
+        console.log(res);
+    </script>
+</body>
+</html>
