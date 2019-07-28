@@ -34,7 +34,7 @@
                 while (count > 0 && pattern.charAt(count) != text.charAt(i)) {
                     count = maxMatchLengths[count - 1];
                 }
-                if (pattern.charAt(count) == text.charAt(i)) {
+                if (pattern.charAt(count) === text.charAt(i)) {
                     count++;
                 }
                 if (count === pattern.length) {
