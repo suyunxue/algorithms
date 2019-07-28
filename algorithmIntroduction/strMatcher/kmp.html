@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calculateMaxMatchLengths(pattern) {
+            var maxMatchLengths = new Array(pattern.length);
+            maxMatchLengths.fill(0);
+            var maxLength = 0;
+            for (var i = 1; i < pattern.length; i++) {
+                while (maxLength > 0 && pattern.charAt(maxLength) !== pattern.charAt(i)) {
+                    maxLength = maxMatchLengths[maxLength - 1];
+                }
+                if (pattern.charAt(i) === pattern.charAt(maxLength)) {
+                    maxLength++;
+                }
+
+                maxMatchLengths[i] = maxLength;
+            }
+            console.log(maxMatchLengths);
+            return maxMatchLengths;
+        }
+
+        function search(text, pattern) {
+            var positions = [];
+            var maxMatchLengths = calculateMaxMatchLengths(pattern);
+            var count = 0;
+            for (var i = 0; i < text.length; i  ++) {
+                while (count > 0 && pattern.charAt(count) != text.charAt(i)) {
+                    count = maxMatchLengths[count - 1];
+                }
+                if (pattern.charAt(count) == text.charAt(i)) {
+                    count++;
+                }
+                if (count === pattern.length) {
+                    positions.push(i - pattern.length + 1);
+                    count = maxMatchLengths[count - 1];
+                }
+            }
+            
+            return positions;
+        }
+
+        var pattern = 'abbaaba';
+        var text = 'abbaabbaaba';
+        console.log(search(text, pattern));
+
+    </script>
+</body>
+</html>
