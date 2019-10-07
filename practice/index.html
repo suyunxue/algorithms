@@ -52,21 +52,33 @@
 
         console.log(binarySearchTree);
 
-        var last = -Infinity;
-
-        var isValidBST = function(root) {
+        function helper(root, lower, upper) {
             if (root === null) {
                 return true;
             }
 
-            if (isValidBST(root.left)) {
-                if (last < root.val) {
-                    last = root.val;
-                    return isValidBST(root.right);
-                }
+            var val = root.val;
+            if (lower !== null && val <= lower) {
+                return false;
             }
 
-            return false;
+            if (upper !== null && val >= upper) {
+                return false;
+            }
+
+            if (!helper(root.right, val, upper)) {
+                return false;
+            }
+            
+            if (!helper(root.left, lower, val)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        var isValidBST = function(root) {
+            return helper(root, null, null);
         };
 
     </script>
