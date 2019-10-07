@@ -4,45 +4,70 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>test</title>
-	<style media="screen">
-
-
-		.a {
-			border: 1px solid crimson;
-		}
-
-	</style>
+	<title>Document</title>
 </head>
 <body>
-<div id="parent">
-	<div id="a">I'am going to be removed</div>
-	<div id="b">Me too!</div>
-</div>
-
-<script>
-
-function fetchComputedStyle(element, property) {
-
-	if(window.getComputedStyle) {
-
-		var computedStyles = window.getComputedStyle(element);
-
-		if(computedStyles) {
-			property = property.replace(/([A-Z])/g, '-$1').toLowerCase();
-			return computedStyles.getpropertyValue(property);
+	<script>
+		var Node = function (val) {
+			this.val = val;
+			this.next = null;
 		}
-	}else if (element.currentStyle) {
-		property = property.replace(
-			/-([a-z])/ig,
-			function (all, letter) {
-				return letter.toUpperCase();
-			});
-			return element.currentStyle[property];
-		)
-	}
-}
 
-</script>
+		class LList {
+			constructor (val) {
+				this.head = new Node(val);
+				this.insert = this.insert;
+				this.find = this.find;
+			}
+
+			find(item) {
+				var curNode = this.head;
+				while(curNode.val !== item) {
+					curNode = curNode.next;
+				}
+				return curNode;
+			}
+
+			insert(newElement, item) {
+				var newNode = new Node(newElement);
+				var curNode = this.find(item);
+				newNode.next = curNode.next;
+				curNode.next = newNode;
+			}
+		}
+
+		// var nodeList = new LList(9);
+		// nodeList.insert(0, 9);
+		// nodeList.insert(3, 0);
+		// nodeList.insert(8, 3);
+		// nodeList.insert(7, 8);
+		// nodeList.insert(3, 7);
+		// nodeList.insert(8, 3);
+		// nodeList.insert(6, 8);
+		// nodeList.insert(3, 6);
+		// nodeList.insert(1, 3);
+
+		var nodeList = new LList(1);
+		nodeList.insert(2, 1);
+		// nodeList.insert(3, 2);
+		// nodeList.insert(4, 3);
+		// nodeList.insert(5, 4);
+		console.log(nodeList.head);
+
+		var reverseList = function (head) {
+			if (head.next === null || head === null) {
+				return head;
+			}
+
+			var newHead = reverseList(head.next);
+			head.next.next = head;
+			head.next = null;
+			return neaHead;
+		};
+
+		removeNthFromEnd(nodeList.head, 1);
+
+
+	</script>
 </body>
 </html>
