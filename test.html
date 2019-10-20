@@ -8,66 +8,22 @@
 </head>
 <body>
 	<script>
-		var Node = function (val) {
-			this.val = val;
-			this.next = null;
+		function test(x) {
+			console.log(x);
+			if (x < 10) {
+				test(++x);
+				test(++x);
+			}
+
+
 		}
 
-		class LList {
-			constructor (val) {
-				this.head = new Node(val);
-				this.insert = this.insert;
-				this.find = this.find;
-			}
-
-			find(item) {
-				var curNode = this.head;
-				while(curNode.val !== item) {
-					curNode = curNode.next;
-				}
-				return curNode;
-			}
-
-			insert(newElement, item) {
-				var newNode = new Node(newElement);
-				var curNode = this.find(item);
-				newNode.next = curNode.next;
-				curNode.next = newNode;
-			}
+		var i = 0;
+		function init() {
+			test(i);
 		}
 
-		// var nodeList = new LList(9);
-		// nodeList.insert(0, 9);
-		// nodeList.insert(3, 0);
-		// nodeList.insert(8, 3);
-		// nodeList.insert(7, 8);
-		// nodeList.insert(3, 7);
-		// nodeList.insert(8, 3);
-		// nodeList.insert(6, 8);
-		// nodeList.insert(3, 6);
-		// nodeList.insert(1, 3);
-
-		var nodeList = new LList(1);
-		nodeList.insert(2, 1);
-		// nodeList.insert(3, 2);
-		// nodeList.insert(4, 3);
-		// nodeList.insert(5, 4);
-		console.log(nodeList.head);
-
-		var reverseList = function (head) {
-			if (head.next === null || head === null) {
-				return head;
-			}
-
-			var newHead = reverseList(head.next);
-			head.next.next = head;
-			head.next = null;
-			return neaHead;
-		};
-
-		removeNthFromEnd(nodeList.head, 1);
-
-
+		init();
 	</script>
 </body>
 </html>
