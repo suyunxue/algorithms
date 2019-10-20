@@ -48,39 +48,23 @@
             else {
                 this.insertNode(root, newNode);
             }
-
         }
 
-
-
-        var levels = [];
-        
-        var levelOrder = function(root) {
-            if (root === null) {
-                return levels;
-            }
-
-            helper(root, 0);
-
-            return levels;
+        var sortedArrayToBST = function(nums) {
+            return ToBST(nums, 0, nums.length - 1);
         };
 
-        function helper(node, level) {
-            if (levels.length === level) {
-                levels.push([]);
+        function ToBST(nums, left, right) {
+            if (left > right) {
+                return null;
             }
 
-            levels[level].push(node.val);
-
-            if (node.left !== null) {
-                helper(node.left, level + 1);
-            }
-
-            if (node.right !== null) {
-                helper(node.right, level + 1);
-            }
+            var mid = parseInt((left + right) / 2);
+            var root = new TreeNode(nums[mid]);
+            root.left = ToBST(nums, left, mid - 1);
+            root.right = ToBST(nums, mid + 1, right);
+            return root;
         }
-
 	</script>
 </body>
 </html>
