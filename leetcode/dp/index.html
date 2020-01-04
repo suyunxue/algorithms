@@ -15,34 +15,31 @@
             找出规律，最小表达式，进行递归，归纳总结
             动态规划就是把这些中间结果存起来，然后再计算的时候直接拿来用
             是一个迭代思维，下一步的计算拿着上一步计算的结果进行使用
-            拿每一天的价格去和他后面的每一天价格做对比，找出差值最大的
-            找找重复的地方，
+            拿出第一个的进行加一旦比上一个小了就放弃
         */
         /**
-         * @param {number[]} prices
+         * @param {number[]} nums
          * @return {number}
          */
-        var maxProfit = function(prices) {
-            var minPrice = Infinity;
-            var maxProfit = 0;
-            for (var i = 0; i < prices.length; i++) {
-                if (prices[i] < minPrice) {
-                    minPrice = prices[i];
+        var maxSubArray = function (nums) {
+            var ans = nums[0];
+            var sum = 0;
+            for (var i = 0; i < nums.length; i++) {
+                if (sum > 0) {
+                    sum += nums[i];
                 }
-                else if (prices[i] - minPrice > maxProfit) {
-                    maxProfit = prices[i] - minPrice;
+                else {
+                    sum = nums[i];
                 }
+                ans = Math.max(ans, sum);
             }
 
-            return maxProfit;
+            return ans;
         };
 
-        var test =   [7,6,4,3,1];
+        var test = [7, 6, 4, 3, 1];
         var ret = maxProfit(test);
         console.log(ret);
-    
-
-       
     </script>
 </body>
 
