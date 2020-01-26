@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {number} n
  * @return {string[]}
  */
- var fizzBuzz = function(n) {
+var fizzBuzz = function(n) {
     var res = [];
 
     for (var i = 1; i <= n; i++) {
@@ -32,9 +22,3 @@
 
     return res;
 };
-
-var res = fizzBuzz(15);
-console.log(res);
-</script>
-</body>
-</html>
