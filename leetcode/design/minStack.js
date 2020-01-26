@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * initialize your data structure here.
  */
@@ -56,15 +46,3 @@ MinStack.prototype.top = function() {
 MinStack.prototype.getMin = function() {
     return this.minStack[this.minStack.length - 1];
 };
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * var obj = new MinStack()
- * obj.push(x)
- * obj.pop()
- * var param_3 = obj.top()
- * var param_4 = obj.getMin()
- */
-</script>
-</body>
-</html>
