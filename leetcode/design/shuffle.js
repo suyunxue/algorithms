@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {number[]} nums
  */
- var Solution = function(nums) {
+var Solution = function(nums) {
     this.nums = nums;
     this.origin = nums.slice(0);
 };
@@ -60,6 +50,3 @@ var param_1 = obj.reset();
 console.log(param_1);
 var param_2 = obj.shuffle();
 console.log(param_2);
-</script>
-</body>
-</html>
