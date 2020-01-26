@@ -10,31 +10,23 @@
 <script>
 /**
  * @param {number} n
- * @return {number}
+ * @return {boolean}
  */
- var countPrimes = function(n) {
-    var isPrime = new Array(n);
-    isPrime.fill(true);
-
-    for (var i = 2; i * i < n; i++) {
-        if (isPrime[i]) {
-            for (j = i * i; j < n; j += i) {
-                isPrime[j] = false;
-            }
+ var isPowerOfThree = function(n) {
+    for (var i = 0; i < n; i++) {
+        var num = Math.pow(3, i);
+        if (num > n) {
+            return false;
+        }
+        else if (num === n) {
+            return true;
         }
     }
 
-    var count = 0;
-    for (var i = 2; i < n; i++) {
-        if (isPrime[i]) {
-            count++;
-        }
-    }
-
-    return count;
+    return false;
 };
 
-var res = countPrimes(10);
+let res = isPowerOfThree(0);
 console.log(res);
 
 </script>
