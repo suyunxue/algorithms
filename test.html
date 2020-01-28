@@ -8,38 +8,39 @@
 </head>
 <body>
 <script>
-/**
- * @param {number} numRows
- * @return {number[][]}
- */
-var generate = function(numRows) {
-    let ret = [];
-    if (numRows === 0) {
-        return ret;
-    }
+    /**
+     * @param {string} s
+     * @return {boolean}
+     */
+    var isValid = function(s) {
+        let stack = [];
+        let map = {
+            '(': ')',
+            '{': '}',
+            '[': ']'
+        };
 
-    if (numRows === 1) {
-        return [[1]];
-    }
-
-    let last = [1, 1];
-    ret.push([1]);
-    ret.push([1, 1]);
-
-    for (let i = 2; i < numRows; i++) {
-        last.push(0);
-        let cur = last.slice(0);
-        for (let j = 1; j <= i; j++) {
-            cur[j] = last[j] + last[j - 1];
+        for (let i = 0; i < s.length; i++) {
+            if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
+                stack.push(s[i]);
+            }
+            else if (s[i] === map[stack[stack.length - 1]]) {
+                stack.pop();
+            }
+            else {
+                stack.push(s[i]);
+            }
         }
-        ret.push(cur);
-        last = cur.slice(0);
-    }
 
-    return ret;
-};
+        if (stack.length) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
 
-let res = generate(5);
+let res = isValid("()[]{}");
 console.log(res);
 
 </script>
