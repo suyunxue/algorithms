@@ -25,3 +25,8 @@ var hammingWeight2 = function (n) {
 
     return bits;
 }
+
+// 这个测试case结果不对
+let input = 11111111111111111111111111111101;
+let res = hammingWeight2(input);
+console.log(res);
