@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {string[]} strs
  * @return {string[][]}
@@ -30,6 +20,3 @@ var groupAnagrams = function(strs) {
 
 let res = groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]);
 console.log(res);
-</script>
-</body>
-</html>
