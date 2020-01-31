@@ -9,57 +9,55 @@
 <body>
 <script>
 /**
- * @param {number[]} nums
- * @return {number[][]}
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
  */
-var threeSum = function(nums) {
-    if (nums.length < 3) {
-        return [];
-    }
+var setZeroes = function(matrix) {
+    var isCol = false;
+    var R = matrix.length;
+    var C = matrix[0].length;
 
-    nums.sort((a, b) => {
-        return a - b;
-    });
-
-    let res = [];
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] > 0) {
-            return res;
+    for (var i = 0; i < R; i++) {
+        if (matrix[i][0] === 0) {
+            isCol = true;
         }
 
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            continue;
-        }
-
-        let l = i + 1;
-        let r = nums.length - 1;
-
-
-        while (l < r) {
-            if ((nums[i] + nums[l] + nums[r]) === 0) {
-                res.push([nums[i], nums[l], nums[r]]);
-                while (l < r && nums[l] === nums[l + 1]) {
-                    l++;
-                }
-                while (l < r && nums[r] === nums[r - 1]) {
-                    r--;
-                }
-                l++;
-                r--;
-            }
-            else if ((nums[i] + nums[l] + nums[r]) < 0) {
-                l++;
-            }
-            else {
-                r--;
+        for (var j = 1; j < C; j++) {
+            if (matrix[i][j] === 0) {
+                matrix[i][0] = 0;
+                matrix[0][j] = 0;
             }
         }
     }
 
-    return res;
+    for (var i = 1; i < R; i++) {
+        for (var j = 1; j < C; j++) {
+            if (matrix[i][0] === 0 || matrix[0][j] === 0) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    if (matrix[0][0] === 0) {
+        for (var i = 0; i < C; i++) {
+            matrix[0][i] = 0;
+        }
+    }
+
+    if (isCol === true) {
+        for (var i = 0; i < R; i++) {
+            matrix[i][0] = 0;
+        }
+    }
+
+    return matrix;
 };
 
-let res = threeSum([-1, 0, 1, 2, -1, -4]);
+let res = setZeroes([
+  [0,1,2,0],
+  [3,4,5,2],
+  [1,3,1,5]
+]);
 console.log(res);
 </script>
 </body>
