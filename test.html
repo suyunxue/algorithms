@@ -9,26 +9,27 @@
 <body>
 <script>
 /**
- * @param {string[]} strs
- * @return {string[][]}
+ * @param {string} s
+ * @return {number}
  */
-var groupAnagrams = function(strs) {
+var lengthOfLongestSubstring = function(s) {
+    var n = s.length;
+    var ans = 0;
+    var i = 0;
+    var j = 0;
     var hashMap = {};
-    var ret = [];
-    for (var i = 0; i < strs.length; i++) {
-        let str = strs[i].split('').sort().join('');
-        if (hashMap[str]) {
-            hashMap[str].push(strs[i]);
+    for (; j < n; j++) {
+        if (hashMap[s[j]]) {
+            i = Math.max(hashMap[s[j]], i);
         }
-        else {
-            hashMap[str] = [strs[i]];
-        }
+        ans = Math.max(ans, j - i + 1);
+        hashMap[s[j]] = j + 1;
     }
 
-    return Object.values(hashMap);
+    return ans;
 };
 
-let res = groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]);
+let res = lengthOfLongestSubstring("abcaddbccbb");
 console.log(res);
 </script>
 </body>
