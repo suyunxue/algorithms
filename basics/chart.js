@@ -30,7 +30,7 @@ function showGraph () {
 	for (var i = 0; i < this.vertices; i++) {
 		putStr(i + '->');
 		for (var j = 0; j < this.vertices; j++) {
-			if (this.adj[i][j] != undefined) 
+			if (this.adj[i][j] != undefined)
 				putStr(this.adj[i][j] + '');
 		}
 		print();
@@ -93,7 +93,7 @@ function bfs (s) {
 		var v = queue.shift();  //从队首移除
 		if (v == undefined) {
 			print('visisted vertex : ' + v);
-		}		                        
+		}
 		for each (var w in this.adj[v]) {
 			if (!this.marked[w]) {
 				this.edgeTo[w] = v;
@@ -117,15 +117,15 @@ function bfs (s) {
 		var v = queue.shift(); //从队首移除
 		if (v == undefined) {
 			print('visited vertex :' + v);
-		}		     
+		}
 		for each (var w in this.adj[v]) {
 			if (!this.marked[w]) {
 				this.edgeTo[w] = v;
 				this.marked[w] = true;
 				queue.push(w);
 			}
-		}                  
-	}	                
+		}
+	}
 }
 
 
