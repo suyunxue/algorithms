@@ -78,21 +78,20 @@
          * @return {number[]}
          */
         var inorderTraversal = function(root) {
-            let res = [];
-            helper(root, res);
+            var stack = [];
+            var res = [];
+            var curr = root;
+            while (curr !== null || stack.length) {
+                while (curr) {
+                    stack.push(curr.val);
+                    curr = curr.left;
+                }
+                curr = stack.pop();
+                res.push(curr.val);
+                curr = curr.right;
+            }
             return res;
         };
-        var helper = function (root, res) {
-            if (root) {
-                if (root.left) {
-                    helper(root.left, res);
-                }
-                res.push(root.val);
-                if (root.right) {
-                    helper(root.right, res);
-                }
-            }
-        }
 	</script>
 </body>
 </html>
