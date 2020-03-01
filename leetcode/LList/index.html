@@ -72,29 +72,36 @@
 		 *     this.next = null;
 		 * }
 		 */
+
 		/**
-		 * @param {ListNode} head
-		 * @return {ListNode}
+		 * @param {ListNode} headA
+		 * @param {ListNode} headB
+		 * x`@return {ListNode}
 		 */
-		var oddEvenList = function(head) {
-			if (head === null) {
+		var getIntersectionNode = function(headA, headB) {
+			if (headA === null || headB === null) {
 				return null;
-			}
-			var odd = head;
-			var oddHead = odd;
-			var evenHead = head.next;
-			var even = evenHead;
-			while (even !== null && even.next !== null) {
-				odd.next = even.next;
-				odd = odd.next;
-				even.next = odd.next;
-				even = even.next;
+			} 
+
+			var pA = headA;
+			var pB = headB;
+			while (pA !== pB) { 
+				if (pA === null) {
+					pA = headB;
+				}
+				else {
+					pA = pA.next;
+				}
+				if (pB === null) {
+					pB = headA;
+				}
+				else {
+					pB = pB.next;
+				}
 			}
 
-			odd.next = evenHead;
-
-			return head;
-		};
+			return pA;
+		};	
 
 	</script>
 </body>
