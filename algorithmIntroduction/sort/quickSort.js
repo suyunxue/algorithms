@@ -12,8 +12,6 @@ function partition(A, p, r) {
     for (var j = p; j <= r - 1; j++) {
         if (A[j] <= x) {
             i = i + 1;
-            console.log(i);
-            console.log(j);
             exchange(A, i, j);
         }
     }
