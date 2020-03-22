@@ -74,48 +74,38 @@
          * }
          */
         /**
-         * @param {TreeNode} root
-         * @return {number[][]}
+         * @param {number[]} preorder
+         * @param {number[]} inorder
+         * @return {TreeNode}
          */
-        var zigzagLevelOrder = function(root) {
-            if (root === null) {
-                return [];
+        var buildTree = function(preorder, inorder) {
+            let map = {};
+            let preIndex = 0;
+
+            function help(left, right) {
+                if (left === right) {
+                    return null;
+                }
+
+                let rootVal =  preorder[preIndex];
+                let root = new TreeNode(rootVal);
+
+                preIndex++;
+
+                let index = map[rootVal];
+                
+                root.left = help(left, index);
+                root.right = help(index + 1, right);
+
+                return root;
             }
 
-            var result = [];
-            var nodeQueue = [];
-            nodeQueue.push(root);
-            nodeQueue.push(null);
-            var levelList = [];
-            var isOrderLeft = true;
 
-            while (nodeQueue.length > 0) {
-                var curNode = nodeQueue.shift();
-                if (curNode) {
-                    if (isOrderLeft) {
-                        levelList.push(curNode.val);
-                    }
-                    else {
-                        levelList.unshift(curNode.val);
-                    }
-                    if (curNode.left) {
-                        nodeQueue.push(curNode.left);
-                    }
-                    if (curNode.right) {
-                        nodeQueue.push(curNode.right);
-                    }
-                }
-                else {
-                    result = result.concat(levelList);
-                    levelList = [];
-                    if (nodeQueue.length > 0) {
-                        nodeQueue.push(null);
-                    }
-                    isOrderLeft = !isOrderLeft;
-                }
-            } 
+            for (let i = 0; i < inorder.length; i++) {
+                map[inorder[i]] = i;
+            }
 
-            return result;
+            return help(0, preorder.length);
         };
 	</script>
 </body>
