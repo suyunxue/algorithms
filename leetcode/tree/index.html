@@ -74,38 +74,12 @@
          * }
          */
         /**
-         * @param {number[]} preorder
-         * @param {number[]} inorder
-         * @return {TreeNode}
+         * @param {TreeNode} root
+         * @param {number} k
+         * @return {number}
          */
-        var buildTree = function(preorder, inorder) {
-            let map = {};
-            let preIndex = 0;
-
-            function help(left, right) {
-                if (left === right) {
-                    return null;
-                }
-
-                let rootVal =  preorder[preIndex];
-                let root = new TreeNode(rootVal);
-
-                preIndex++;
-
-                let index = map[rootVal];
-                
-                root.left = help(left, index);
-                root.right = help(index + 1, right);
-
-                return root;
-            }
-
-
-            for (let i = 0; i < inorder.length; i++) {
-                map[inorder[i]] = i;
-            }
-
-            return help(0, preorder.length);
+        var kthSmallest = function(root, k) {
+            
         };
 	</script>
 </body>
