@@ -32,10 +32,54 @@ var letterCombinations = function (digits) {
         backtrack('', digits);
     }
 
-
-
     return output;
 };
+
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    var combinations = [];
+    if (digits.length === 0) {
+        return combinations;
+    }
+
+    var phoneMap = {
+        2: 'abc',
+        3: 'def',
+        4: 'ghi',
+        5: 'jkl',
+        6: 'mno',
+        7: 'pqrs',
+        8: 'tuv',
+        9: 'wxyz'
+    };
+
+    backtrack(combinations, phoneMap, digits, 0, '');
+
+    return combinations;
+};
+
+function backtrack(combinations, phoneMap, digits, index, combination) {
+    if (index === digits.length) {
+        combinations.push(combination);
+    }
+    else {
+        let digit = digits[index];
+        let letters = phoneMap[digit];
+        let lettersCount = letters.length;
+        for (let i = 0; i < lettersCount; i++) {
+            combination += letters[i];
+            backtrack(combinations, phoneMap, digits, index + 1, combination);
+            combination = combination.split('')
+            combination.splice(index, 1);
+            combination = combination.join('');
+        }
+    }
+}
+
+
 
 let res = letterCombinations("");
 console.log(res)
