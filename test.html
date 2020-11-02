@@ -1,59 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-<script>
-/**
- * // Definition for a Node.
- * function Node(val, left, right, next) {
- *    this.val = val === undefined ? null : val;
- *    this.left = left === undefined ? null : left;
- *    this.right = right === undefined ? null : right;
- *    this.next = next === undefined ? null : next;
- * };
- */
-
-/**
- * @param {Node} root
- * @return {Node}
- */
-var connect = function(root) {
-    if (root == null) {
-        return root;
-    }
-
-    var q = [];
-    q.push(root);
-
-    while (q.length > 0) {
-        var size = q.length;
-
-        for (var i = 0; i < size; i++) {
-            
-            var node = q.shift();
-
-            if (i < size - 1) {
-                node.next = q[0];
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} k
+         * @return {number[]}
+         */
+        var topKFrequent = function(nums, k) {
+            var occurrences = {};
+            for (var num of nums) {
+                if (occurrences[num]) {
+                    occurrences[num] = occurrences[num] + 1;
+                }
+                else {
+                    occurrences[num] = 1;
+                }
             }
 
-            if (node.left !== null) {
-                q.push(node.left);
+            console.log(occurrences)
+
+            var quene = [];
+            for (var [num, count] of Object.entries(occurrences)) {
+                console.log(num, count)
+                if (quene.length === k) {
+                    if (quene[0].count < count) {
+                        quene.shift();
+                        quene.unshift({
+                            num: num,
+                            count: count
+                        });
+                        quene.sort((a, b) => {
+                            return a.count - b.count;
+                        });
+                    }
+                }
+                else {
+                    quene.unshift({
+                        num: num,
+                        count: count
+                    });
+
+                    quene.sort((a, b) => {
+                        return a.count - b.count;
+                    });
+                }
             }
 
-            if (node.right !== null) {
-                q.push(node.right);
+            console.log(quene);
+
+            var ret = [];
+            for (var i = 0; i < k; i++) {
+                ret[i] = parseInt(quene[i].num, 10);
             }
 
-        }
-    }
+            return ret;
+        };
 
-    return root;
-};
-</script>
+        var nums = [5,2,5,3,5,3,1,1,3]; 
+        var k = 2;
+        console.log(topKFrequent(nums, k));
+    </script>
 </body>
+
 </html>
