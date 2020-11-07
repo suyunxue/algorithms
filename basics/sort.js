@@ -159,7 +159,6 @@ function shellsort () {
 
 //自顶上下的归并排序递归算法太深了
 // 自底向上的归并排序是非递归或者迭代版本
-
 function mergeSort (arr) {
 	if (arr.length < 2) {
 		return;
@@ -170,7 +169,7 @@ function mergeSort (arr) {
 		left = 0;
 		right = step;
 		while (right + step <= arr.length) {
-			mergeArrays(arr, left, left+step; right; right+step);
+			mergeArrays(arr, left, left+step, right, right+step);
 			left = right + step;
 			right = left + step;
 		}
@@ -245,5 +244,5 @@ function qSort (list) {
 			greater.push(list[i]);
 		}
 	}
-	return qSort(lesser).concat(pivot,qSort(greater));
+	return qSort(lesser).concat(pivot, qSort(greater));
 }
