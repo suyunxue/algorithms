@@ -138,7 +138,7 @@ while (h < N/3) {
 	h = 3 * h + 1;
 }
 
-//动态计算间隔的希尔排序
+// 动态计算间隔的希尔排序
 function shellsort () {
 	var N = this.dataStore.length;
 	var h = 1;
@@ -147,17 +147,14 @@ function shellsort () {
 	}
 	while (h >= 1) {
 		for (var i = h; i < N; i++) {
-			for (var j = i; j >= h && this.dataStore[j] < this.dataStore[j-h]);
-				 j -= h) {
+			for (var j = i; j >= h && this.dataStore[j] < this.dataStore[j-h]; j -= h) {
 				swap(this.dataStore, j, j-h);
 			}
 		}
 	}
 }
 
-
-
-//自顶上下的归并排序递归算法太深了
+// 自顶上下的归并排序递归算法太深了
 // 自底向上的归并排序是非递归或者迭代版本
 function mergeSort (arr) {
 	if (arr.length < 2) {
