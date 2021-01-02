@@ -11,29 +11,35 @@
 <body>
     <script>
         /**
-         * @param {number[]} nums
-         * @return {boolean}
+         * @param {number} m
+         * @param {number} n
+         * @return {number}
          */
-        var canJump = function(nums) {
-            let rightMost = 0;
-            for (let i = 0; i < nums.length; i++) {
-                if (rightMost >= i) {
-                    rightMost = Math.max(rightMost, i + nums[i]);
-                    if (rightMost >= nums.length - 1) {
-                        return true;
-                    }
+        var uniquePaths = function(m, n) {
+            var f = new Array(m);
+            for (var i = 0; i < m; i++) {
+                f[i] = new Array(n).fill(0);
+            }
+
+            for (var i = 0; i < m; i++) {
+                f[i][0] = 1;
+            }
+
+            for (var j= 0; j < n; j++) {
+                f[0][j] = 1;
+            }
+
+            for (var i = 1; i < m; i++) {
+                for (var j = 1; j < n; j++) {
+                    f[i][j] = f[i][j - 1] + f[i - 1][j];
                 }
             }
 
-            return false;
+            return f[m - 1][n - 1];
         };
 
-        let nums = [3,2,1,0,4];
-        let res = canJump(nums);
+        var res = uniquePaths(3, 7);
         console.log(res);
-
-
-
     </script>
 </body>
 
