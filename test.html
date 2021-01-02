@@ -11,34 +11,45 @@
 <body>
     <script>
         /**
-         * @param {number} m
-         * @param {number} n
-         * @return {number}
-         */
-        var uniquePaths = function(m, n) {
-            var f = new Array(m);
-            for (var i = 0; i < m; i++) {
-                f[i] = new Array(n).fill(0);
+        * @param {number[]} coins
+        * @param {number} amount
+        * @return {number}
+        */
+        var coinChange = function(coins, amount) {
+            if (amount < 1) {
+                return 0;
+            }
+            var count = new Array(amount).fill(0);
+            return coinChangeCompute(coins, amount, count);
+        };
+
+        function coinChangeCompute(coins, rem, count) {
+            if (rem < 0) {
+                return -1;
             }
 
-            for (var i = 0; i < m; i++) {
-                f[i][0] = 1;
+            if (rem === 0) {
+                return 0;
             }
 
-            for (var j= 0; j < n; j++) {
-                f[0][j] = 1;
-            }
+            if (count[rem - 1] !== 0) {
+                return count[rem - 1];
+            } 
 
-            for (var i = 1; i < m; i++) {
-                for (var j = 1; j < n; j++) {
-                    f[i][j] = f[i][j - 1] + f[i - 1][j];
+            var min = Number.MAX_VALUE;
+            for (var i = 0; i < coins.length; i++) {
+                var res = coinChangeCompute(coins, rem - coins[i], count);
+                if (res >= 0 && res < min) {
+                    min = 1 + res;
                 }
             }
 
-            return f[m - 1][n - 1];
-        };
+            count[rem - 1] = (min === Number.MAX_VALUE) ? -1 : min;
+            return count[rem - 1];
+        }
 
-        var res = uniquePaths(3, 7);
+        var coins = [1, 2, 5], amount = 11;
+        var res = coinChange(coins, amount);
         console.log(res);
     </script>
 </body>
