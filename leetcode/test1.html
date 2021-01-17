@@ -7,67 +7,79 @@
 </head>
 <body>
     <script>
-    /**
-     * Definition for a binary tree node.
-     * function TreeNode(val) {
-     *     this.val = val;
-     *     this.left = this.right = null;
-     * }
-     */
+        /**
+         * Initialize your data structure here.
+         */
+        var RandomizedSet = function() {
+            this.dict = {};
+            this.list = [];
+        };
 
-    function rserialize(root, str) {
-        if (root === null) {
-            str += 'None,';
-        }
-        else {
-            str += root.val + ',';
-            str = rserialize(root.left, str);
-            str = rserialize(root.right, str);
-        }
+        /**
+         * Inserts a value to the set. Returns true if the set did not already contain the specified element. 
+         * @param {number} val
+         * @return {boolean}
+         */
+        RandomizedSet.prototype.insert = function(val) {
+            if (this.dict[val] !== undefined) {
+                return false;
+            }
 
-        return str;
-    }
+            this.dict[val] = this.list.length;
+            this.list.push(val);
+            return true;
+        };
 
-    /**
-     * Encodes a tree to a single string.
-     *
-     * @param {TreeNode} root
-     * @return {string}
-     */
-    var serialize = function(root) {
-        return rserialize(root, '');
-    };
+        /**
+         * Removes a value from the set. Returns true if the set contained the specified element. 
+         * @param {number} val
+         * @return {boolean}
+         */
+        RandomizedSet.prototype.remove = function(val) {
+            if (this.dict[val] === undefined) {
+                return false;
+            }
 
-    function rdeserialize(data) {
-        if (data[0] === 'None') {
-            data.shift();
-            return null;
-        }
+            
+            var len = this.list.length;
+            var lastElement = this.list[len - 1];
 
-        var root = new TreeNode(data[0]);
-        data.shift();
-        root.left = rdeserialize(data);
-        root.right = rdeserialize(data);
+            var index = this.dict[val];
+            var temp = this.list[index];
+            this.list[index] = this.list[len - 1];
+            this.list[len - 1] = temp;
 
-        return root;
-    }
+            this.dict[lastElement] = index;
+            this.list.pop();
+            delete this.dict[val];
+            
+            return true;
+        };
 
-    /**
-     * Decodes your encoded data to tree.
-     *
-     * @param {string} data
-     * @return {TreeNode}
-     */
-    var deserialize = function(data) {
-        var dataArray = data.split(',');
-        return rdeserialize(dataArray);
-    };
+        /**
+         * Get a random element from the set.
+         * @return {number}
+         */
+        RandomizedSet.prototype.getRandom = function() {
+            return this.list[Math.floor(Math.random() * this.list.length)];
+        };
 
-    /**
-     * Your functions will be called as such:
-     * deserialize(serialize(root));
-     */
+        /**
+         * Your RandomizedSet object will be instantiated and called as such:
+         * var obj = new RandomizedSet()
+         * var param_1 = obj.insert(val)
+         * var param_2 = obj.remove(val)
+         * var param_3 = obj.getRandom()
+         */
 
+        var res = new RandomizedSet();
+        res.insert(1);
+        res.remove(2);
+        res.insert(2);
+        res.getRandom();
+        res.remove(1);
+        res.insert(2);
+        console.log(res);
     </script>
 </body>
 </html>
