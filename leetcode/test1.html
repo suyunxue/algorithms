@@ -7,35 +7,66 @@
 </head>
 <body>
     <script>
-    function coinChange(coins, amount) {
-        if (amount < 1) {
-            return 0;
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val) {
+     *     this.val = val;
+     *     this.left = this.right = null;
+     * }
+     */
+
+    function rserialize(root, str) {
+        if (root === null) {
+            str += 'None,';
         }
-        var count = new Array(amount).fill(0)
-        return coinChangeR(coins, amount, count);
+        else {
+            str += root.val + ',';
+            str = rserialize(root.left, str);
+            str = rserialize(root.right, str);
+        }
+
+        return str;
     }
 
-    function coinChangeR(coins, rem, count) {
-        if (rem < 0) {
-            return -1;
+    /**
+     * Encodes a tree to a single string.
+     *
+     * @param {TreeNode} root
+     * @return {string}
+     */
+    var serialize = function(root) {
+        return rserialize(root, '');
+    };
+
+    function rdeserialize(data) {
+        if (data[0] === 'None') {
+            data.shift();
+            return null;
         }
-        if (rem == 0) {
-            return 0;
-        }
-        if (count[rem - 1] != 0) {
-            return count[rem - 1];
-        }
-        int min = Math.MAX_VALUE;
-        for (int coin : coins) {
-            int res = coinChange(coins, rem - coin, count);
-            if (res >= 0 && res < min) {
-                min = 1 + res;
-            }
-        }
-        count[rem - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
-        return count[rem - 1];
+
+        var root = new TreeNode(data[0]);
+        data.shift();
+        root.left = rdeserialize(data);
+        root.right = rdeserialize(data);
+
+        return root;
     }
-}
+
+    /**
+     * Decodes your encoded data to tree.
+     *
+     * @param {string} data
+     * @return {TreeNode}
+     */
+    var deserialize = function(data) {
+        var dataArray = data.split(',');
+        return rdeserialize(dataArray);
+    };
+
+    /**
+     * Your functions will be called as such:
+     * deserialize(serialize(root));
+     */
 
     </script>
 </body>
