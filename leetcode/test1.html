@@ -8,31 +8,21 @@
 <body>
     <script>
 
-        function getNext(n) {
-            var totalSum = 0;
-            while (n > 0) {
-                var d = n % 10;
-                n = parseInt(n / 10);
-                totalSum += d * d;
-            }
-
-            return totalSum;
-        }
         /**
          * @param {number} n
-         * @return {boolean}
+         * @return {number}
          */
-        var isHappy = function(n) {
-            var seen = {};
-            while (n !== 1 && (seen[n] === undefined)) {
-                seen[n] = 1;
-                n = getNext(n);
+        var trailingZeroes = function(n) {
+            var zeroCount = 0;
+            while (n > 0) {
+                n /= 5;
+                n = parseInt(n);
+                zeroCount += n;
             }
-
-            return n === 1;
+            return zeroCount;
         };
 
-        let res = isHappy(19);
+        let res = trailingZeroes(5);
         console.log(res);
 
     </script>
