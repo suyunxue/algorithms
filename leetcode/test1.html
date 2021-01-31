@@ -7,30 +7,20 @@
 </head>
 <body>
     <script>
-        function quickMul(x, N) {
-            if (N === 0) {
-                return 1;
-            }
-
-            var y = quickMul(x, parseInt(N / 2));
-            return N % 2 === 0 ? y * y : y * y * x;
-        }
-
         /**
          * @param {number} x
-         * @param {number} n
          * @return {number}
          */
-        var myPow = function(x, n) {
-            var N = n;
-            return N > 0 ? quickMul(x, N) : 1 / quickMul(x, -N);
-        };
+        var mySqrt = function(x) {
+            if (x === 0) {
+                return 0;
+            }
+            var ans = parseInt(Math.exp(0.5 * Math.log(x)));
+            return (ans + 1) * (ans + 1) <= x ? (ans + 1) : ans;
+        };  
 
-        var x = 2.0000;
-        var n = 10;
-        var res = myPow(2, 10);
+        var res = mySqrt(2147395600);
         console.log(res);
-
     </script>
 </body>
 </html>
