@@ -7,22 +7,22 @@
 </head>
 <body>
     <script>
-
         /**
-         * @param {number} n
+         * @param {string} s
          * @return {number}
          */
-        var trailingZeroes = function(n) {
-            var zeroCount = 0;
-            while (n > 0) {
-                n /= 5;
-                n = parseInt(n);
-                zeroCount += n;
+        var titleToNumber = function(s) {
+            var ans = '';
+            for (var i = 0; i < s.length; i++) {
+                var num = s[i].charCodeAt() - 65 + 1;
+                console.log(num)
+                ans = ans * 26 + num;
             }
-            return zeroCount;
+
+            return ans;
         };
 
-        let res = trailingZeroes(5);
+        var res = titleToNumber('A');
         console.log(res);
 
     </script>
