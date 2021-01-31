@@ -7,22 +7,28 @@
 </head>
 <body>
     <script>
-        /**
-         * @param {string} s
-         * @return {number}
-         */
-        var titleToNumber = function(s) {
-            var ans = '';
-            for (var i = 0; i < s.length; i++) {
-                var num = s[i].charCodeAt() - 65 + 1;
-                console.log(num)
-                ans = ans * 26 + num;
+        function quickMul(x, N) {
+            if (N === 0) {
+                return 1;
             }
 
-            return ans;
+            var y = quickMul(x, parseInt(N / 2));
+            return N % 2 === 0 ? y * y : y * y * x;
+        }
+
+        /**
+         * @param {number} x
+         * @param {number} n
+         * @return {number}
+         */
+        var myPow = function(x, n) {
+            var N = n;
+            return N > 0 ? quickMul(x, N) : 1 / quickMul(x, -N);
         };
 
-        var res = titleToNumber('A');
+        var x = 2.0000;
+        var n = 10;
+        var res = myPow(2, 10);
         console.log(res);
 
     </script>
