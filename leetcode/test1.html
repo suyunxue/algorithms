@@ -8,68 +8,60 @@
 <body>
     <script>
         /**
-         * @param {number} dividend
-         * @param {number} divisor
-         * @return {number}
+         * @param {number} numerator
+         * @param {number} denominator
+         * @return {string}
          */
-        var divide = function(dividend, divisor) {
-            let MAX_VALUE = Math.pow(2, 31) - 1;
-            let MIN_VALUE = Math.pow(-2, 31);
-            if (dividend === 0) {
-                return 0;
+        var fractionToDecimal = function(numerator, denominator) {
+            if (numerator === 0) {
+                return '0';
             }
-            if (divisor === 1) {
-                return dividend;
+
+            var fraction = [];
+
+            if ((numerator < 0 && denominator > 0) || (numerator > 0 && denominator < 0)) {
+                fraction.push('-');
             }
-            if (divisor === -1) {
-                if (Math.abs(dividend) > MAX_VALUE) {
-                    return MAX_VALUE;
+
+            var dividend = Math.abs(numerator);
+            var divisor = Math.abs(denominator);
+            var quotient = dividend / divisor;
+            quotient = quotient < 1 ? 0 : parseInt(quotient);
+            fraction.push(quotient);
+            var remainder = dividend % divisor;
+            if (remainder === 0) {
+                return fraction.join('');
+            }
+
+            fraction.push('.');
+            var map = {};
+            while (remainder !== 0) {
+                if (map[remainder]) {
+                    fraction.splice(map[remainder], 0, '(');
+                    fraction.push(')');
+                    break;
                 }
-                else if (Math.abs(dividend) > MIN_VALUE) {
-                    return -dividend;
-                }
-                else {
-                    return MAX_VALUE;
-                }
+
+                map[remainder] = fraction.length;
+                remainder *= 10;
+                var quotient = remainder / divisor;
+                quotient = quotient < 1 ? 0 : parseInt(quotient);
+                fraction.push(quotient);
+                // fraction.push(parseInt(remainder / divisor));
+                remainder %= divisor;
             }
 
-            let a = dividend;
-            let b = divisor;
-
-            let sign = 1;
-
-            if ((a > 0 && b < 0) || (a < 0 && b > 0)) {
-                sign = -1;
+            if (fraction.length > Math.pow(10, 4)) {
+                return fraction.slice(0, Math.abs(10, 4)).join('');
             }
 
-            a = a > 0 ? a : -a;
-            b = b > 0 ? b : -b;
-
-            let res = div(a, b);
-
-            if (sign > 0) {
-                return res > MAX_VALUE ? MAX_VALUE : res;
-            }
-            return -res;
+            return fraction.join('');
         };
 
-        function div(a, b) {
-            if (a < b) {
-                return 0;
-            }
-
-            let count = 1;
-            let tb = b;
-            while ((tb + tb) < a) {
-                count = count + count;
-                tb = tb + tb;
-            }
-
-            return count + div(a - tb, b);
-        }
-
-        let res = divide(-2147483648, -1);
+        let numerator = 1, denominator = 214748364;
+        let res = fractionToDecimal(numerator, denominator);
         console.log(res);
+
     </script>
 </body>
 </html>
