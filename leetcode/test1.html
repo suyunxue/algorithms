@@ -8,21 +8,26 @@
 <body>
     <script>
         /**
-         * @param {number} a
-         * @param {number} b
+         * @param {string[]} tokens
          * @return {number}
          */
-        var getSum = function(a, b) {
-            while (b !== 0) {
-                let carry = (b & a) << 1;
-                a = (a ^ b);
-                b = carry;
+        var evalRPN = function(tokens) {
+            let stack = [];
+            for (let i = 0; i < tokens.length; i++) {
+                switch(tokens[i]) {
+                    case '+': stack.push(Number(stack.pop()) + Number(stack.pop())); break;
+                    case '-': stack.push(-Number(stack.pop()) + Number(stack.pop())); break;
+                    case '*': stack.push(Number(stack.pop()) * Number(stack.pop())); break;
+                    case '/': stack.push(parseInt(1 / Number(stack.pop()) * Number(stack.pop()))); break;
+                    default: stack.push(tokens[i]); break;
+                }
             }
-            return a;
+            return stack.pop();
         };
 
-        let sum = getSum(5, 4);
-        console.log(sum);
+        let input = ["4","3","-"];
+        let res = evalRPN(input);
+        console.log(res);
     </script>
 </body>
 </html>
