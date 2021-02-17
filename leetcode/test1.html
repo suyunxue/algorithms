@@ -8,25 +8,33 @@
 <body>
     <script>
         /**
-         * @param {string[]} tokens
+         * @param {number[]} nums
          * @return {number}
          */
-        var evalRPN = function(tokens) {
-            let stack = [];
-            for (let i = 0; i < tokens.length; i++) {
-                switch(tokens[i]) {
-                    case '+': stack.push(Number(stack.pop()) + Number(stack.pop())); break;
-                    case '-': stack.push(-Number(stack.pop()) + Number(stack.pop())); break;
-                    case '*': stack.push(Number(stack.pop()) * Number(stack.pop())); break;
-                    case '/': stack.push(parseInt(1 / Number(stack.pop()) * Number(stack.pop()))); break;
-                    default: stack.push(tokens[i]); break;
+        var majorityElement = function(nums) {
+            let majorityCount = nums.length / 2;
+            while (true) {
+                let rand = parseInt(Math.random() * nums.length, 10);
+                let candidate = nums[rand];
+                if (countOccurences(nums, candidate) > majorityCount) {
+                    return candidate;
                 }
             }
-            return stack.pop();
         };
 
-        let input = ["4","3","-"];
-        let res = evalRPN(input);
+        function countOccurences(nums, num) {
+            let count = 0;
+            for (let i = 0; i < nums.length; i++) {
+                if (nums[i] === num) {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        let input = [3,2,3];
+        let res = majorityElement(input);
         console.log(res);
     </script>
 </body>
