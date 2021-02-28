@@ -12,28 +12,35 @@
     <script>
         /**
          * @param {number[]} nums
-         * @return {number}
+         * @return {number[]}
          */
-        var lengthOfLIS = function(nums) {
-            if (nums.length === 0) {
-                return 0;
-            }
-            var dp = new Array(nums.length).fill(1);
-            var maxans = 1;
-            for (var i = 1; i < nums.length; i++) {
-                for (var j = 0; j < i; j++) {
-                    if (nums[i] > nums[j]) {
-                        dp[i] = Math.max(dp[i], dp[j] + 1);
-                    }
-                }
-                maxans = Math.max(maxans, dp[i]);   
+        var productExceptSelf = function(nums) {
+            const length = nums.length;
+
+            const L = new Array(length);
+            const R = new Array(length);
+
+            const answer = new Array(length);
+
+            L[0] = 1;
+            for (let i = 1; i < length; i++) {
+                L[i] = L[i - 1] * nums[i - 1];
             }
 
-            return maxans;
+            R[length - 1] = 1;
+            for (let i = length - 2; i >= 0; i--) {
+                R[i] = R[i + 1] * nums[i + 1];
+            }
+
+            for (let i = 0; i < length; i++) {
+                answer[i] = L[i] * R[i];
+            }
+
+            return answer;            
         };
 
-        var nums = [10, 9, 2, 5, 3, 7, 101, 18];
-        var res = lengthOfLIS(nums);
+        let input = [1,2,3,4];
+        let res = productExceptSelf(input);
         console.log(res);
     </script>
 </body>
