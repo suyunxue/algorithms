@@ -7,23 +7,24 @@
 </head>
 <body>
 <script>
-function findKth(head, k) {
-    var cur = head;
-    var now = head;
+function printReversing(head) {
+    var stack = [];
 
-    var i = 0;
-    while (cur !== null && i++ < k) {
-        cur = cur.next;
+    var node = head.next;
+    while (node !== null) {
+        stack.push(node);
+        node = node.next;
     }
 
-    while (cur !== null) {
-        now = now.next;
-        cur = cur.next;
+    var popNode;
+    var print = [];
+    while (stack.length) {
+        popNode = stack.pop();
+        print.push(popNode.value);
     }
-
-    return now;
+    
+    return print;
 }
-
 </script>
 </body>
 </html>
