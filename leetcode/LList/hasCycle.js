@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
-function isLoopList(head) {
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+ var hasCycle = function(head) {
     var slowPointer;
     var fastPointer;
 
@@ -22,7 +25,4 @@ function isLoopList(head) {
     }
 
     return false;
-}
-</script>
-</body>
-</html>
+};
