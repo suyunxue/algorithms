@@ -7,39 +7,25 @@
 </head>
 <body>
 <script>
-    function cycleNode(head) {
-        if (head === null) {
+    function entryNodeOfLoop(pHead) {
+        if (pHead.next === null || pHead.next.next === null) {
             return null;
         }
-
-        first = head;
-        second = head;
-        while (first !== null && first.next !== null) {
-            first = first.next.next;
-            second = second.next;
-
-            if (first === second) {
-                return first;
+        var slow = pHead.next;
+        var fast = pHead.next.next;
+        while (fast !== null) {
+            if (fast === slow) {
+                fast = pHead;
+                while (fast !== slow) {
+                    fast = fast.next;
+                    slow = slow.next;
+                }
+                return fast;
             }
+            fast = fast.next.next;
+            slow = slow.next;
         }
-
         return null;
-    }
-
-    function getCycleLength(head) {
-        var node = cycleNode(head);
-        if (node === null) {
-            return 0;
-        }
-
-        var length = 1;
-        var current = node.next;
-        while (current !== node) {
-            length++;
-            current = current.next;
-        }
-
-        return length;
     }
 </script>
 </body>
