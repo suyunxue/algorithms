@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
-    function clone(pHead) {
-        if (pHead === null) {
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+ var copyRandomList = function(head) {
+    if (head === null) {
             return null;
         }
 
-        var currentNode = pHead;
+        var currentNode = head;
         // 1、复制每个结点，如复制结点A得到A1，将结点A1插到结点A后面
         while (currentNode !== null) {
             var cloneNode = new Node(currentNode.val);
@@ -22,7 +26,7 @@
             currentNode = nextNode;
         }
 
-        currentNode = pHead;
+        currentNode = head;
         // 重新遍历链表，复制老结点的随机指针给新结点，如A1.random = A.random.next;
         while (currentNode !== null) {
             currentNode.next.random = currentNode.random === null ? null : currentNode.random.next;
@@ -30,8 +34,8 @@
         }
 
         // 拆分链表，将链表分为原链表和复制后的链表
-        currentNode = pHead;
-        var pCloneHead = pHead.next;
+        currentNode = head;
+        var pCloneHead = head.next;
         while (currentNode !== null) {
             var cloneNode = currentNode.next;
             currentNode.next = cloneNode.next;
@@ -40,7 +44,4 @@
         }
 
         return pCloneHead;
-    }
-</script>
-</body>
-</html>
+};
