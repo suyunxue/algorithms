@@ -10,32 +10,27 @@
 
 <body>
     <script>
-        /**
-         * @param {number[]} nums
-         * @return {number[]}
-         */
-        var productExceptSelf = function(nums) {
-            const length = nums.length;
-
-            const answer = new Array(length);
-
-            answer[0] = 1;
-            for (let i = 1; i < length; i++) {
-                answer[i] = answer[i - 1] * nums[i - 1];
+       /**
+        * @param {number[]} A
+        * @param {number[]} B
+        * @param {number[]} C
+        * @param {number[]} D
+        * @return {number}
+        */
+        var fourSumCount = function(A, B, C, D) {
+            const countAB = new Map();
+            A.forEach(u => B.forEach(v => countAB.set(u + v, (countAB.get(u + v) || 0) + 1)));
+            let ans = 0;
+            for (let u of C) {
+                for (let v of D) {
+                    if (countAB.has(-u - v)) {
+                        ans += countAB.get(-u - v);
+                    }
+                }
             }
 
-            let R = 1;
-            for (let i = length - 1; i >= 0; i--) {
-                answer[i] = answer[i] * R;
-                R *= nums[i];
-            }
-
-            return answer;            
+            return ans;
         };
-
-        let input = [1,2,3,4];
-        let res = productExceptSelf(input);
-        console.log(res);
     </script>
 </body>
 
