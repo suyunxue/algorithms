@@ -7,37 +7,37 @@
 </head>
 <body>
 <script>
-    /**
-     * @param {number[]} nums
-     * @return {number}
-     */
-    var firstMissingPositive = function(nums) {
-        let n = nums.length;
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    const n = nums.length;
+    let l = 1, r = n - 1, ans = -1;
+    while (l <= r) {
+        let mid = (l + r) >> 1;
+        let cnt = 0;
         for (let i = 0; i < n; i++) {
-            if (nums[i] <= 0) {
-                nums[i] = n + 1;
-            }
+            cnt += nums[i] <= mid;
         }
 
-        for (let i = 0; i < n; i++) {
-            let num = Math.abs(nums[i]);
-            if (num <= n) {
-                nums[num - 1] = -Math.abs(nums[num - 1]);
-            }
+        if (cnt <= mid) {
+            l = mid + 1;
         }
-
-        for (let i = 0; i < n; i++) {
-            if (nums[i] > 0) {
-                return i + 1;
-            }
+        else {
+            r = mid - 1;
+            ans = mid;
         }
-
-        return n + 1;
     }
 
-    let nums = [1,1]
-    let res = firstMissingPositive(nums);
-    console.log(res);
+    return ans;
+};
+
+let nums = [1,3,4,2,2];
+let ans = findDuplicate(nums);
+console.log(ans);
+
+
 </script>
 </body>
 </html>
