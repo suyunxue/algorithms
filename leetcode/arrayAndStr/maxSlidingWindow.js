@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {number[]} nums
  * @param {number} k
@@ -46,7 +37,3 @@ var maxSlidingWindow = function(nums, k) {
 let nums = [4,-2], k = 2;
 let res = maxSlidingWindow(nums, k);
 console.log(res);
-
-</script>
-</body>
-</html>
