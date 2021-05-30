@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {string} s
  * @return {number}
@@ -53,7 +44,3 @@ var calculate = function(s) {
 var s = " 3+5 / 2 ";
 let res = calculate(s);
 console.log(res);
-
-</script>
-</body>
-</html>
