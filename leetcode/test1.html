@@ -8,45 +8,42 @@
 <body>
 <script>
 /**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
  */
-var maxSlidingWindow = function(nums, k) {
-    if (nums.length === 0 || k === 0) {
-        return [0];
-    }
-    let i = 0;
-    let j = k;
-    let res = new Array(nums.length - k + 1);
-    let deque = [];
-    for (let i = 0; i < k; i++) {
-        while (deque.length && deque[deque.length - 1] < nums[i]) {
-            deque.pop();
+
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+var copyRandomList = function(head) {
+    var visitedHash = new Map();
+
+    function clone(head) {
+        if (head === null) {
+            return null;
         }
-        deque.push(nums[i]);
-    }
-    res[0] = deque[0];
-    for (let i = k; i < nums.length; i++) {
-        if (deque[0] === nums[i - k]) {
-            deque.shift();
+        
+        if (visitedHash.get(head)) {
+            return visitedHash.get(head);
         }
 
-        while (deque.length && deque[deque.length - 1] < nums[i]) {
-            deque.pop();
-        }
-        deque.push(nums[i]);
+        var node = new Node(head.val, null, null);
 
-        res[i - k + 1] = deque[0];
+        visitedHash.set(head, node);
+
+        node.next = clone(head.next);
+        node.random  = clone(head.random);
+
+        return node;
     }
-
-    return res;
+    
+    return clone(head);
 };
-
-let nums = [4,-2], k = 2;
-let res = maxSlidingWindow(nums, k);
-console.log(res);
-
 </script>
 </body>
 </html>

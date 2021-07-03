@@ -45,3 +45,42 @@
 
         return pCloneHead;
 };
+
+
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+ var copyRandomList = function(head) {
+    var visitedHash = new Map();
+
+    function clone(head) {
+        if (head === null) {
+            return null;
+        }
+        
+        if (visitedHash.get(head)) {
+            return visitedHash.get(head);
+        }
+
+        var node = new Node(head.val, null, null);
+
+        visitedHash.set(head, node);
+
+        node.next = clone(head.next);
+        node.random  = clone(head.random);
+
+        return node;
+    }
+    
+    return clone(head);
+};
