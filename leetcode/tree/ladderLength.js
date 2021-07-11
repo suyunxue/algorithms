@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
-
-
-
 /**
  * @param {string} beginWord
  * @param {string} endWord
@@ -77,16 +65,3 @@ var ladderLength = function(beginWord, endWord, wordList) {
     }
     return 0;
 };
-
-let beginWord = "set", endWord = "oar", wordList = ["oar","sat","dip","sir",
-"lap","tat","off","din","caw","hob","lie","tam","wyo","noe","rob","nay",
-"hah","box","mac","low","tin","tip","set","geo","too","tea","fin",
-"tad","zed","key","ray","shy","min","kin","rep","now","ink","fag",
-"fed","pas","huh","bad","oks","pan","kip","inc","bat","pop","pat",
-"aol","cud","tan","car","hut","oat","gap","hes","hen","chi"];
-
-let res = ladderLength(beginWord, endWord, wordList);
-console.log(res)
-</script>
-</body>
-</html>
