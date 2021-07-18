@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
-
 /**
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
@@ -56,7 +46,3 @@ var solve = function(board) {
 let board = [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]];
 solve(board);
 console.log(board)
-
-</script>
-</body>
-</html>
