@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
@@ -20,7 +11,7 @@
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function(root, p, q) {
+ var lowestCommonAncestor = function(root, p, q) {
     let ans;
     const dfs = (root, p, q) => {
         if (root === null) {
@@ -41,6 +32,3 @@ var lowestCommonAncestor = function(root, p, q) {
 
     return ans;
 };
-</script>
-</body>
-</html>
