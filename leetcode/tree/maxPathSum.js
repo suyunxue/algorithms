@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -19,7 +10,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var maxPathSum = function(root) {
+ var maxPathSum = function(root) {
     let maxNum = Number.MIN_SAFE_INTEGER;
     function maxGain(node) {
         if (node === null) {
@@ -40,6 +31,3 @@ var maxPathSum = function(root) {
 
     return maxNum;
 };
-</script>
-</body>
-</html>
