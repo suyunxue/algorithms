@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {number} numCourses
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
-var canFinish = function(numCourses, prerequisites) {
+ var canFinish = function(numCourses, prerequisites) {
     let indegrees = new Array(numCourses).fill(0);
     let adjacency = [];
     let queue = [];
@@ -46,6 +37,3 @@ var canFinish = function(numCourses, prerequisites) {
 
     return numCourses === 0;
 };
-</script>
-</body>
-</html>
