@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {number} numCourses
  * @param {number[][]} prerequisites
  * @return {number[]}
  */
-var findOrder = function(numCourses, prerequisites) {
+ var findOrder = function(numCourses, prerequisites) {
     // 存储有向图
     let edges = [];
 
@@ -79,6 +70,3 @@ var findOrder = function(numCourses, prerequisites) {
 
 let res = findOrder(2, [[1, 0]]);
 console.log(res);
-</script>
-</body>
-</html>

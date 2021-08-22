@@ -37,3 +37,4 @@
 
     return numCourses === 0;
 };
+
