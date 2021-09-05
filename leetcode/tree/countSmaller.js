@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<script>
 /**
  * @param {number[]} nums
  * @return {number[]}
  */
-var countSmaller = function(nums) {
+ var countSmaller = function(nums) {
     var c;
     var a;
     var resultList = [];
@@ -63,11 +54,3 @@ var countSmaller = function(nums) {
         return a.indexOf(x) + 1;
     }
 };
-
-let input = [5,2,6,1];
-// debugger
-let res = countSmaller(input);
-console.log(res);
-</script>
-</body>
-</html>
