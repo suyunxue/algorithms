@@ -1,73 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-<script>
-/**
- * @param {number[]} nums
- * @return {number[]}
- */
-var countSmaller = function(nums) {
-    var c;
-    var a;
-    var resultList = [];
-    discretization(nums);
-    init(nums.length + 5);
-    for (let i = nums.length - 1; i >= 0; i--) {
-        let id = getId(nums[i]);
-        resultList.push(query(id - 1)); 
-        update(id);
-    }
+    <script>
+        /**
+         * @param {string} s
+         * @return {string[][]}
+         */
+        var partition = function (s) {
+            let n = s.length;
+            let arr = s.split('');
 
-    resultList.reverse();
-    return resultList;
+            let dp = new Array(n);
+            for (let i = 0; i < n; i++) {
+                dp[i] = new Array(n).fill(true);
+            }
 
-    function update(pos) {
-        while (pos < c.length) {
-            c[pos] += 1;
-            pos += lowBit(pos);
-        }
-    }
-    function discretization(nums) {
-        let set = new Set();
-        for (let num of nums) {
-            set.add(num);
-        }
-        let size = set.size;
-        a = new Array(size);
-        let index = 0;
-        for (let num of set) {
-            a[index++] = num;
-        }
-        a.sort((a, b) => a - b);
-    }
-    function init(length) {
-        c = new Array(length).fill(0);
-    }
-    function query(pos) {
-        let ret = 0;
-        while (pos > 0) {
-            ret += c[pos];
-            pos -= lowBit(pos);
-        }
-        return ret;
-    }
-    function lowBit(x) {
-        return x & (-x);
-    }
-    function getId(x) {
-        return a.indexOf(x) + 1;
-    }
-};
+            for (let i = n - 1; i >= 0; i--) {
+                for (let j = i + 1; j < n; j++) {
+                    dp[i][j] = (arr[i] === arr[j]) && dp[i + 1][j - 1];
+                }
+            }
 
-let input = [5,2,6,1];
-debugger
-let res = countSmaller(input);
-console.log(res);
-</script>
+            let res = [];
+            let path = [];
+            dfs(res, path, s, n, dp, 0);
+            let ans = new Array(res.length);
+            for (let i = 0; i < ans.length; i++) {
+                ans[i] = [];
+            }
+
+            for (let i = 0; i < res.length; i++) {
+                ans[i] = new Array(res[i].length);
+                for (let j = 0; j < ans[i].length; j++) {
+                    ans[i][j] = res[i][j];
+                }
+            }
+
+            return ans;
+
+        };
+
+        function dfs(res, path, s, n, dp, pos) {
+            if (pos === n) {
+                res.push(path.slice(0));
+                return;
+            }
+
+            for (let i = pos; i < n; i++) {
+                // s[pos:i] (闭区间是一个回文，所以递归搜索s[i + 1, s.length - 1])
+                if (dp[pos][i]) {
+                    path.push(s.substring(pos, i + 1));
+                    dfs(res, path, s, n, dp, i + 1);
+                    path.pop();
+                }
+            }
+        }
+
+        let s = "aab";
+        let res = partition(s);
+        console.log(res);
+    </script>
 </body>
+
 </html>
