@@ -10,74 +10,46 @@
 
 <body>
     <script>
-        const merge = function (head1, head2) {
-            const dummyHead = new ListNode(0);
-            let temp = dummyHead;
-            let temp1 = head1;
-            let temp2 = head2;
-            while (temp1 !== null && temp2 !== null) {
-                if (temp1.val <= temp2.val) {
-                    temp.next = temp1;
-                    temp1 = temp1.next;
-                }
-                else {
-                    temp.next = temp2;
-                    temp2 = temp2.next;
-                }
-
-                temp = temp.next;
+        function findKthLarest(nums, k) {
+            let n = nums.length;
+            // debugger
+            for (let i = 0; i < k; i++) {
+                heapify(nums, n - i);
+                [nums[0], nums[n - 1 - i]] = [nums[n - 1 - i], nums[0]];
             }
 
-            if (temp1 !== null) {
-                temp.next = temp1;
-            } 
-            else if (temp2 !== null) {
-                temp.next = temp2;
-            }
-
-            return dummyHead.next;
+            return nums[n - k];
         }
 
-        const toSortList = function (head, tail) {
-            if (head === null) {
-                return head;
-            }
+        function heapify(nums, n) {
 
-            if (head.next === tail) {
-                head.next = null;
-                return head;
+            for (let i = parseInt(n / 2) - 1; i >= 0; i--) {
+                adjustHeap(nums, i, n);
             }
+        }
 
-            let slow = head;
-            let fast = head;
-            while (fast !== tail) {
-                slow = slow.next;
-                fast = fast.next;
-                if (fast !== tail) {
-                    fast = fast.next;
+        function adjustHeap(nums, i, n) {
+            let k;
+            let temp = nums[i];
+            for (let k = i * 2 + 1; k < n; k = k * 2 + 1) {
+                if (k + 1 < n && nums[k] < nums[k + 1]) {
+                    k++;
+                }
+                if (nums[i] < nums[k]) {
+                    nums[i] = nums[k];
+                    i = k;
+                } else {
+                    break;
                 }
             }
-
-            let mid = slow;
-            
-            return merge(toSortList(head, mid), toSortList(mid, tail));
+            nums[i] = temp;
         }
-        /**
-         * Definition for singly-linked list.
-         * function ListNode(val, next) {
-         *     this.val = (val===undefined ? 0 : val)
-         *     this.next = (next===undefined ? null : next)
-         * }
-         */
-        /**
-         * @param {ListNode} head
-         * @return {ListNode}
-         */
-        var sortList = function(head) {
-            return toSortList(head, null);
-        };
 
-        
+        let nums = [1, 35, 5, 6, 65];
+        // heapify(nums, nums.length);
+        // console.log(nums);
+        let res = findKthLarest(nums, 2)
+        console.log(nums, res);
     </script>
 </body>
 
