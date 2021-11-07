@@ -9,63 +9,81 @@
 
 <body>
     <script>
-        /**
-         * @param {string} s
-         * @return {string[][]}
-         */
-        var partition = function (s) {
-            let n = s.length;
-            let arr = s.split('');
+        function Node(val) {
+            this.val = val;
+            this.tail = false;
+            this.next = null;
+        }
 
-            let dp = new Array(n);
-            for (let i = 0; i < n; i++) {
-                dp[i] = new Array(n).fill(true);
-            }
+        var Trie = function () {
+            this.root = new Map;
+        }
 
-            for (let i = n - 1; i >= 0; i--) {
-                for (let j = i + 1; j < n; j++) {
-                    dp[i][j] = (arr[i] === arr[j]) && dp[i + 1][j - 1];
-                }
-            }
-
-            let res = [];
-            let path = [];
-            dfs(res, path, s, n, dp, 0);
-            let ans = new Array(res.length);
-            for (let i = 0; i < ans.length; i++) {
-                ans[i] = [];
-            }
-
-            for (let i = 0; i < res.length; i++) {
-                ans[i] = new Array(res[i].length);
-                for (let j = 0; j < ans[i].length; j++) {
-                    ans[i][j] = res[i][j];
-                }
-            }
-
-            return ans;
-
-        };
-
-        function dfs(res, path, s, n, dp, pos) {
-            if (pos === n) {
-                res.push(path.slice(0));
-                return;
-            }
-
-            for (let i = pos; i < n; i++) {
-                // s[pos:i] (闭区间是一个回文，所以递归搜索s[i + 1, s.length - 1])
-                if (dp[pos][i]) {
-                    path.push(s.substring(pos, i + 1));
-                    dfs(res, path, s, n, dp, i + 1);
-                    path.pop();
+        Trie.prototype.insert = function (word) {
+            let cur = this.root;
+            for (let i = 0; i < word.length; i++) {
+                if (cur.has(word[i])) {
+                    let curnode = cur.get(word[i]);
+                    if (i !== word.length - 1) {
+                        cur = curnode.next;
+                    } else {
+                        let curnode = new Node(word[i]);
+                        curnode.next = new Map;
+                        cur.set(word[i], curnode);
+                        if (i !== word.length - 1) {
+                            cur = curnode.next;
+                        }
+                    }
+                    if (i === word.length - 1) {
+                        cur.get(word[i]).tail = true;
+                    }
                 }
             }
         }
 
-        let s = "aab";
-        let res = partition(s);
-        console.log(res);
+        Trie.prototype.search = function (word) {
+            let cur = this.root;
+            for (let i = 0; i < word.length - 1; i++) {
+                if (cur.has(word[i])) {
+                    cur = cur.get(word[i]).next;
+                } else {
+                    return false;
+                }
+            }
+            if (cur.has(word[word.length - 1]) && cur.get(word[word.length - 1]).tail) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        Trie.prototype.startsWith = function (prefix) {
+            let cur = this.root;
+            for (let i = 0; i < prefix.length; i++) {
+                if (cur.has(prefix[i])) {
+                    cur = cur.get(prefix[i]).next;
+                } else {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /**
+         * @param {character[][]} board
+         * @param {string[]} words
+         * @return {string[]}
+         */
+        var findWords = function (board, words) {
+            var dirs = [
+                [1, 0],
+                [-1, 0],
+                [0, 1],
+                [0, -1]
+            ];
+            var trie =
+        };
     </script>
 </body>
 
